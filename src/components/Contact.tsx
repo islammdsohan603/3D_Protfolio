@@ -44,7 +44,12 @@ export default function Contact() {
         body: JSON.stringify(formData),
       });
 
-      const data = await response.json();
+      let data: { success?: boolean; message?: string } = {};
+      try {
+        data = await response.json();
+      } catch {
+        // In case the response is not valid JSON
+      }
 
       if (response.ok && data.success) {
         setStatus("success");
@@ -61,12 +66,12 @@ export default function Contact() {
         setFormData({ name: "", email: "", subject: "", message: "" });
       } else {
         setStatus("error");
-        setErrorMessage(data.message || "Something went wrong. Please try again.");
+        setErrorMessage(data.message || `Server error (${response.status}). Please try again later.`);
       }
     } catch (err: unknown) {
       console.error("Contact Form submission error:", err);
       setStatus("error");
-      setErrorMessage("Unable to connect to server. Please check your internet connection or try again later.");
+      setErrorMessage("Unable to connect to the backend server. Please make sure the server is running.");
     }
   };
 
