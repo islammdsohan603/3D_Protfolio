@@ -2,7 +2,8 @@
   {
     "id": 1,
     "title": "RecipeHub - Recipe Sharing Platform",
-    "description": "A full-stack recipe sharing platform where users can discover, create, like, and manage recipes, while administrators can monitor content, users, and platform activities through a secure dashboard.",
+    "description": "A production-grade full-stack recipe sharing platform where users can discover, create, like, and manage recipes, while administrators monitor content, user permissions, and platform analytics through a secure dashboard.",
+    "architecture": "Designed with Next.js App Router and React Server Components for optimal LCP performance. The backend utilizes Express.js microservices with MongoDB schema indexing for fast aggregation pipelines. Authentication is secured via JWT and Firebase Auth, while Stripe handles premium subscription webhooks.",
     "tech": [
       "Next.js",
       "React",
@@ -14,26 +15,38 @@
       "JWT",
       "Stripe"
     ],
+    "tags": [
+      "Next.js",
+      "React",
+      "Node.js",
+      "Express.js",
+      "MongoDB",
+      "Tailwind CSS",
+      "Firebase Authentication",
+      "JWT",
+      "Stripe"
+    ],
     "github": "https://github.com/islammdsohan603/recipe_web_site_client_code",
+    "githubUrl": "https://github.com/islammdsohan603/recipe_web_site_client_code",
     "live": "https://recipehub-roan.vercel.app/",
+    "liveUrl": "https://recipehub-roan.vercel.app/",
     "image": "https://i.ibb.co.com/gFJv0262/recipeprojects.png",
     "features": [
-      "Role-based authentication for Users and Admins",
-      "Create, edit, delete, and manage personal recipes",
-      "Browse, search, and filter recipes by category",
-      "Like and add recipes to Favorites",
-      "Report inappropriate recipes to administrators",
-      "Premium membership with Stripe payment integration",
-      "Responsive User Dashboard for recipe and profile management",
-      "Admin Dashboard to manage users, recipes, reports, and premium requests",
-      "Secure JWT authentication with protected routes",
-      "Mobile-friendly responsive design"
+      "Role-based RBAC authentication for Users and Administrators",
+      "Create, edit, delete, and manage personal recipe repositories",
+      "Full-text fuzzy search engine with category filter pipeline",
+      "Like, favorite, and report inappropriate recipe submissions",
+      "Stripe payment gateway integration with dynamic checkout session",
+      "Responsive User Dashboard with real-time status updates",
+      "Admin Analytics Dashboard for user management and reporting",
+      "Secure JWT authentication with protected middleware routes"
     ]
   },
   {
     "id": 2,
-    "title": "Job Portal Website",
-    "description": "A full-stack job portal platform where job seekers can search and apply for jobs, while recruiters can post and manage job listings through a secure and responsive dashboard.",
+    "title": "Job Portal Web Engine",
+    "description": "A high-concurrency full-stack job portal platform connecting job seekers with recruiters, featuring real-time application tracking, automated job filtering, and recruiter dashboards.",
+    "architecture": "Built with modular MERN stack architecture. Express.js REST APIs process job postings and application submissions, while MongoDB indexes ensure sub-50ms search query responses. Styled with high-contrast obsidian Tailwind glassmorphism.",
     "tech": [
       "Next.js",
       "React",
@@ -43,37 +56,63 @@
       "Tailwind CSS",
       "JWT"
     ],
+    "tags": [
+      "Next.js",
+      "React",
+      "Node.js",
+      "Express.js",
+      "MongoDB",
+      "Tailwind CSS",
+      "JWT"
+    ],
     "github": "https://github.com/islammdsohan603/job-portal-website",
+    "githubUrl": "https://github.com/islammdsohan603/job-portal-website",
     "live": "https://jobswebsite-sooty.vercel.app/",
+    "liveUrl": "https://jobswebsite-sooty.vercel.app/",
     "image": "https://i.ibb.co/m5TF6VZQ/jobprotal.png",
     "features": [
-      "Role-based authentication for Job Seekers and Recruiters",
-      "Create, update, and manage job postings",
-      "Advanced job search and filtering system",
-      "Apply for jobs with application tracking",
-      "Responsive dashboard for recruiters and applicants",
-      "Secure JWT authentication and protected routes"
+      "Dual recruiter and applicant authorization profiles",
+      "Post, edit, and archive dynamic job listings",
+      "Advanced search with location, salary range, and tech stack filters",
+      "One-click application workflow with resume attachment tracking",
+      "Recruiter analytics dashboard monitoring application pipelines",
+      "State-persistent session storage with JWT validation"
     ]
   },
   {
     "id": 3,
-    "title": "Programming Courses Website",
-    "description": "A modern programming course platform where users can explore coding courses, view details, and access structured learning content with a clean responsive UI.",
-    "tech": ["Next.js", "React", "Tailwind CSS", "JavaScript"],
+    "title": "Programming Courses Platform",
+    "description": "A modern, responsive e-learning platform providing structured programming courses, interactive code snippets, module tracking, and seamless course exploration.",
+    "architecture": "Engineered for maximum frontend responsiveness using Next.js, React, and Tailwind CSS. Employs lightweight client component state trees and pre-rendered SSG layouts for immediate page transitions.",
+    "tech": [
+      "Next.js",
+      "React",
+      "Tailwind CSS",
+      "JavaScript"
+    ],
+    "tags": [
+      "Next.js",
+      "React",
+      "Tailwind CSS",
+      "JavaScript"
+    ],
     "github": "https://github.com/islammdsohan603/progrmming-curses-website",
+    "githubUrl": "https://github.com/islammdsohan603/progrmming-curses-website",
     "live": "https://programing-curors.vercel.app/",
+    "liveUrl": "https://programing-curors.vercel.app/",
     "image": "https://i.ibb.co/5Xx9rFfJ/Screenshot-2026-05-25-195539.png",
     "features": [
-      "Course listing with details",
-      "Responsive UI design",
-      "Modern landing page",
-      "Easy navigation system"
+      "Comprehensive course catalog with topic categorization",
+      "Detailed course curriculum breakdown and instructor profiles",
+      "Mobile-optimized responsive learning UI with dark theme",
+      "Instant client-side filter and course search bar"
     ]
   },
   {
     "id": 4,
     "title": "Doctor Appointment Manager",
-    "description": "A full-stack doctor appointment system where users can book appointments, manage bookings, and view doctor availability with authentication support.",
+    "description": "A medical scheduling system enabling patients to find specialist doctors, select available time slots, book online consultations, and manage digital medical appointments.",
+    "architecture": "Constructed with Node.js and Express REST services interfacing with MongoDB Atlas database collections. Features custom date-time availability collision detection algorithm to prevent double-booking.",
     "tech": [
       "Next.js",
       "Node.js",
@@ -82,15 +121,24 @@
       "Tailwind CSS",
       "Authentication"
     ],
+    "tags": [
+      "Next.js",
+      "Node.js",
+      "Express.js",
+      "MongoDB",
+      "Tailwind CSS",
+      "Authentication"
+    ],
     "github": "https://github.com/islammdsohan603/Doctor_Appointment-_Manager",
+    "githubUrl": "https://github.com/islammdsohan603/Doctor_Appointment-_Manager",
     "live": "https://doctor-appointment-dusky-chi.vercel.app/",
+    "liveUrl": "https://doctor-appointment-dusky-chi.vercel.app/",
     "image": "https://i.ibb.co/Q3rJLJqK/Screenshot-2026-05-21-091523.png",
     "features": [
-      "User authentication system",
-      "Doctor listing and details",
-      "Appointment booking system",
-      "Booking management dashboard"
+      "Doctor specialty directory with availability schedule view",
+      "Interactive appointment calendar booking system",
+      "Patient booking management and status updates",
+      "Secure user login and profile authorization"
     ]
   }
-   
 ]

@@ -14,7 +14,7 @@ const ROLES = [
   "Next.js App Router Architect",
   "Programming Hero BLACKBELT",
   "Node.js & MongoDB Specialist",
-  "3D & Creative Web Developer",
+  "Enterprise System Developer",
 ];
 
 export default function Hero() {
@@ -52,10 +52,9 @@ export default function Hero() {
       particleCount: 100,
       spread: 80,
       origin: { y: 0.3 },
-      colors: ["#00f2fe", "#9d4edd", "#10b981"],
+      colors: ["#6366f1", "#38bdf8", "#10b981"],
     });
 
-    // Direct download trigger via anchor element
     const link = document.createElement("a");
     link.href = RESUME_DOWNLOAD_URL;
     link.target = "_blank";
@@ -84,7 +83,7 @@ export default function Hero() {
 
   return (
     <section id="hero" className="relative min-h-screen flex items-center justify-center pt-28 pb-16 overflow-hidden">
-      {/* 3D R3F Antigravity Interactive Background Canvas */}
+      {/* 3D Antigravity Canvas Background */}
       <AntigravityCanvasWrapper />
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col lg:flex-row items-center justify-between gap-12 w-full">
@@ -96,7 +95,7 @@ export default function Hero() {
           className="flex-1 text-center lg:text-left space-y-6"
         >
           {/* Status Badge */}
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-slate-900/80 border border-cyan-500/30 text-cyan-400 text-xs font-mono tracking-wide shadow-[0_0_15px_rgba(0,242,254,0.2)]">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/[0.04] border border-cyan-500/30 text-cyan-400 text-xs font-mono tracking-wide shadow-[0_0_15px_rgba(56,189,248,0.15)]">
             <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
             <span className="w-2 h-2 rounded-full bg-emerald-400 -ml-4" />
             <span>AVAILABLE FOR HIRE & CONTRACTS</span>
@@ -104,26 +103,28 @@ export default function Hero() {
 
           {/* Headline */}
           <div className="space-y-2">
-            <h2 className="text-xl sm:text-2xl font-mono text-zinc-400">
+            <h2 className="text-xl sm:text-2xl font-mono text-zinc-400 font-light">
               Hello, World! 👋 I&apos;m
             </h2>
             <h1 className="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-white leading-none">
-              <span className="text-gradient-multi">MD. SOHAN ISLAM</span>
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-indigo-400 to-purple-400">
+                MD. SOHAN ISLAM
+              </span>
             </h1>
           </div>
 
           {/* Typing Role Animation */}
           <div className="h-12 flex items-center justify-center lg:justify-start">
             <div className="flex items-center gap-2 text-xl sm:text-2xl lg:text-3xl font-bold font-mono text-cyan-400">
-              <Terminal className="w-7 h-7 text-purple-400" />
+              <Terminal className="w-7 h-7 text-indigo-400" />
               <span>{displayText}</span>
               <span className="w-1 h-7 bg-cyan-400 animate-pulse" />
             </div>
           </div>
 
           {/* Value proposition paragraph */}
-          <p className="max-w-2xl text-base sm:text-lg text-zinc-300 font-light leading-relaxed">
-            Passionate Full-Stack Web Developer crafting high-performance 3D interactive web applications, robust Next.js architectures, and scalable REST/GraphQL APIs with modern UI glassmorphism. Recognized as a <span className="text-cyan-400 font-semibold">Programming Hero Blackbelt Developer</span>.
+          <p className="max-w-2xl text-base sm:text-lg text-zinc-400 font-light leading-relaxed">
+            Passionate Full-Stack Web Developer crafting high-performance 3D interactive web applications, robust Next.js architectures, and scalable REST APIs. Recognized as a <span className="text-cyan-400 font-medium">Programming Hero Blackbelt Developer</span>.
           </p>
 
           {/* CTA Buttons */}
@@ -131,16 +132,16 @@ export default function Hero() {
             {/* Download Resume Button */}
             <button
               onClick={handleDownloadResume}
-              className="px-7 py-3.5 rounded-xl font-bold text-sm text-black bg-gradient-to-r from-cyan-400 via-sky-400 to-purple-500 hover:from-cyan-300 hover:to-purple-400 shadow-[0_0_25px_rgba(0,242,254,0.4)] hover:shadow-[0_0_35px_rgba(0,242,254,0.7)] transition-all duration-300 flex items-center gap-2 group cursor-pointer"
+              className="px-7 py-3.5 rounded-xl font-bold text-sm text-black bg-gradient-to-r from-cyan-400 via-indigo-400 to-indigo-500 hover:from-cyan-300 hover:to-indigo-400 shadow-[0_0_25px_rgba(56,189,248,0.3)] hover:shadow-[0_0_35px_rgba(99,102,241,0.5)] transition-all duration-300 flex items-center gap-2 group cursor-pointer"
             >
-              <Download className="w-5 h-5 group-hover:translate-y-0.5 transition-transform" />
-              <span>Download Resume / CV</span>
+              <Download className="w-5 h-5 group-hover:translate-y-0.5 transition-transform text-black" />
+              <span>Download CV / Resume</span>
             </button>
 
             {/* Contact Me */}
             <a
               href="#contact"
-              className="px-7 py-3.5 rounded-xl font-semibold text-sm text-white glass-card hover:bg-slate-800/80 border border-white/20 hover:border-cyan-400/50 transition-all duration-300 flex items-center gap-2 group"
+              className="px-7 py-3.5 rounded-xl font-semibold text-sm text-zinc-200 bg-white/[0.04] hover:bg-white/[0.08] border border-white/[0.1] hover:border-cyan-400/40 transition-all duration-300 flex items-center gap-2 group"
             >
               <Mail className="w-5 h-5 text-cyan-400 group-hover:scale-110 transition-transform" />
               <span>Contact Me</span>
@@ -160,17 +161,17 @@ export default function Hero() {
           </div>
 
           {/* Quick Metrics Bar */}
-          <div className="pt-8 grid grid-cols-3 gap-4 border-t border-white/10 max-w-lg mx-auto lg:mx-0">
+          <div className="pt-8 grid grid-cols-3 gap-4 border-t border-white/[0.08] max-w-lg mx-auto lg:mx-0">
             <div>
-              <div className="text-2xl sm:text-3xl font-bold font-mono text-cyan-400">100%</div>
+              <div className="text-2xl sm:text-3xl font-extrabold font-mono text-cyan-400">100%</div>
               <div className="text-xs text-zinc-400 uppercase tracking-wider">Satisfaction Rate</div>
             </div>
             <div>
-              <div className="text-2xl sm:text-3xl font-bold font-mono text-purple-400">Batch 13</div>
+              <div className="text-2xl sm:text-3xl font-extrabold font-mono text-indigo-400">Batch 13</div>
               <div className="text-xs text-zinc-400 uppercase tracking-wider">Blackbelt Rank</div>
             </div>
             <div>
-              <div className="text-2xl sm:text-3xl font-bold font-mono text-emerald-400">20+</div>
+              <div className="text-2xl sm:text-3xl font-extrabold font-mono text-emerald-400">20+</div>
               <div className="text-xs text-zinc-400 uppercase tracking-wider">Live Projects</div>
             </div>
           </div>
@@ -183,8 +184,8 @@ export default function Hero() {
           transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
           className="flex-1 flex items-center justify-center relative"
         >
-          {/* Neon Ring Backdrop Glow */}
-          <div className="absolute w-72 h-72 sm:w-96 sm:h-96 rounded-full bg-gradient-to-tr from-cyan-500/30 to-purple-600/30 blur-3xl animate-pulse-ring pointer-events-none" />
+          {/* Ring Backdrop Glow */}
+          <div className="absolute w-72 h-72 sm:w-96 sm:h-96 rounded-full bg-gradient-to-tr from-cyan-500/20 to-indigo-600/20 blur-3xl animate-pulse-ring pointer-events-none" />
 
           {/* 3D Tilt Card */}
           <div
@@ -194,23 +195,23 @@ export default function Hero() {
               transformStyle: "preserve-3d",
               transform: `perspective(1000px) rotateX(${cardRotateX}deg) rotateY(${cardRotateY}deg)`,
             }}
-            className="relative glass-card p-4 rounded-3xl border border-cyan-500/30 glow-cyan max-w-sm sm:max-w-md w-full animate-float transition-all duration-200 cursor-pointer"
+            className="relative bg-white/[0.03] backdrop-blur-xl p-4 rounded-3xl border border-white/[0.08] hover:border-cyan-500/40 max-w-sm sm:max-w-md w-full transition-all duration-200 cursor-pointer shadow-2xl"
           >
-            <div className="relative rounded-2xl overflow-hidden aspect-square bg-slate-900 flex items-center justify-center group">
+            <div className="relative rounded-2xl overflow-hidden aspect-square bg-[#0d1117] flex items-center justify-center group border border-white/[0.05]">
               {/* Sci-Fi Grid Overlay */}
-              <div className="absolute inset-0 bg-[radial-gradient(#00f2fe_1px,transparent_1px)] [background-size:16px_16px] opacity-20 pointer-events-none" />
+              <div className="absolute inset-0 bg-[radial-gradient(#38bdf8_1px,transparent_1px)] [background-size:16px_16px] opacity-15 pointer-events-none" />
 
               {/* Styled Profile Avatar Representation */}
               <div
                 style={{ transform: "translateZ(25px)" }}
-                className="relative z-10 w-full h-full flex flex-col items-center justify-center p-6 bg-gradient-to-b from-slate-900/80 via-slate-950 to-slate-900 border border-white/5 text-center"
+                className="relative z-10 w-full h-full flex flex-col items-center justify-center p-6 bg-gradient-to-b from-[#0d1117]/80 via-[#08090a] to-[#0d1117] text-center"
               >
                 {/* 3D Glowing Orb & Photo Border */}
                 <div
                   style={{ transform: "translateZ(35px)" }}
-                  className="w-36 h-36 sm:w-44 sm:h-44 rounded-full bg-gradient-to-tr from-cyan-400 via-sky-500 to-purple-600 p-[3px] shadow-[0_0_35px_rgba(0,242,254,0.6)] mb-4 transition-transform group-hover:scale-105 duration-500"
+                  className="w-36 h-36 sm:w-44 sm:h-44 rounded-full bg-gradient-to-tr from-cyan-400 via-indigo-500 to-purple-500 p-[3px] shadow-[0_0_30px_rgba(56,189,248,0.4)] mb-4 transition-transform group-hover:scale-105 duration-500"
                 >
-                  <div className="w-full h-full rounded-full bg-[#09090b] flex items-center justify-center overflow-hidden">
+                  <div className="w-full h-full rounded-full bg-[#08090a] flex items-center justify-center overflow-hidden">
                     <Image
                       src="/sohanimage.png"
                       alt="MD. SOHAN ISLAM"
@@ -221,7 +222,7 @@ export default function Hero() {
                   </div>
                 </div>
 
-                <h3 className="text-xl sm:text-2xl font-bold text-white tracking-wide">MD. SOHAN ISLAM</h3>
+                <h3 className="text-xl sm:text-2xl font-extrabold text-white tracking-tight">MD. SOHAN ISLAM</h3>
                 <p className="text-xs font-mono text-cyan-400 mt-1">Full-Stack Web Developer</p>
 
                 {/* Verified Tag */}
