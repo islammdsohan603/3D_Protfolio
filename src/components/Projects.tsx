@@ -2,11 +2,15 @@
 
 import React, { useRef } from "react";
 import { FolderGit2 } from "lucide-react";
-import { useScroll } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 import ProjectCard, { ProjectItemData } from "./ProjectCard";
 import rawProjects from "@/components/db/projects.json";
-import { ScrollReveal } from "./ui/ScrollReveal";
 
+/**
+ * Awwwards / Sheryians Progressive Stacked-Pinning Interaction Deck
+ * Features continuous container-pinned scroll track (min-h-[400vh]), zero-jitter
+ * mathematical card layer calculations, and seamless exit dampening into the Contact section.
+ */
 export default function Projects() {
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -18,37 +22,93 @@ export default function Projects() {
 
   const projects = rawProjects as ProjectItemData[];
 
+  // =========================================================================
+  // SEAMLESS TRANSITION TO NEXT SECTION (SMOOTH EXIT GEOMETRY)
+  // Stage holds stable across the final card threshold, then smoothly slides up
+  // (y: 0 -> -30px) and dampens opacity (1.0 -> 0.90) during scrollYProgress 0.90 -> 1.00
+  // eliminating sudden visual cuts before the Contact section enters.
+  // =========================================================================
+  const stageY = useTransform(scrollYProgress, (progress) => {
+    if (progress < 0.90) return 0;
+    const t = Math.min(1, Math.max(0, (progress - 0.90) / 0.10));
+    // Smoothstep C^1 interpolation prevents acceleration jerk
+    const smoothT = t * t * (3 - 2 * t);
+    return -30 * smoothT;
+  });
+
+  const stageOpacity = useTransform(scrollYProgress, (progress) => {
+    if (progress < 0.90) return 1;
+    const t = Math.min(1, Math.max(0, (progress - 0.90) / 0.10));
+    const smoothT = t * t * (3 - 2 * t);
+    return 1 - smoothT * 0.10; // 1.0 -> 0.90
+  });
+
+  // Micro progress indicator for telemetry bar
+  const progressWidth = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
+
   return (
-    <section id="projects" className="relative py-20 lg:py-32 z-10 overflow-x-clip">
-      <div className="w-11/12 max-w-7xl mx-auto">
-        {/* Section Header: Obsidian Typography & Architecture Kicker */}
-        <ScrollReveal className="text-center space-y-4 mb-16 lg:mb-24">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-zinc-900 border border-zinc-800 text-zinc-400 text-xs font-mono tracking-wider shadow-sm">
-            <FolderGit2 className="w-3.5 h-3.5 text-indigo-400" />
-            <span>SELECTED WORKS</span>
+    <section
+      id="projects"
+      ref={containerRef}
+      className="relative min-h-[400vh] bg-[#09090b]"
+      aria-label="Selected Works & Case Studies"
+    >
+      {/* Pinned Viewport Track: Sticks firmly for the full 400vh scroll duration */}
+      <div className="sticky top-0 h-screen w-full flex flex-col justify-between pt-16 sm:pt-20 lg:pt-24 pb-4 sm:pb-6 overflow-hidden">
+        {/* Stage wrapper with smooth exit dampening */}
+        <motion.div
+          style={{ y: stageY, opacity: stageOpacity }}
+          className="w-11/12 max-w-7xl mx-auto flex flex-col h-full justify-between"
+        >
+          {/* Section Header: Obsidian Typography with Selected Works Kicker */}
+          <div className="text-center space-y-2.5 sm:space-y-3 mb-2 sm:mb-4 shrink-0">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-zinc-900 border border-zinc-800 text-zinc-400 text-xs font-mono tracking-wider shadow-sm">
+              <FolderGit2 className="w-3.5 h-3.5 text-indigo-400" />
+              <span>SELECTED WORKS // PRODUCTION CASE STUDIES</span>
+            </div>
+
+            <h2 className="text-2xl sm:text-4xl lg:text-5xl font-extrabold text-zinc-100 tracking-tight">
+              Featured Engineering & <span className="text-indigo-400">Scaled Architecture</span>
+            </h2>
+
+            <p className="max-w-2xl mx-auto text-zinc-400 text-xs sm:text-sm font-light leading-relaxed hidden sm:block">
+              Progressive pinned case studies demonstrating scalable Next.js App Router architecture, microservices, and interactive 3D web systems.
+            </p>
           </div>
 
-          <h2 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold text-zinc-100 tracking-tight">
-            Featured Engineering & <span className="text-indigo-400">Scaled Architecture</span>
-          </h2>
+          {/* Stacking Card Deck Canvas: All cards anchor in this stage */}
+          <div className="relative w-full flex-1 flex items-center justify-center my-auto min-h-[460px] sm:min-h-[520px] lg:min-h-[540px]">
+            {projects.map((project, index) => (
+              <ProjectCard
+                key={project.id}
+                project={project}
+                index={index}
+                total={projects.length}
+                containerProgress={scrollYProgress}
+              />
+            ))}
+          </div>
 
-          <p className="max-w-2xl mx-auto text-zinc-400 text-sm sm:text-base font-light leading-relaxed">
-            Production case studies demonstrating scalable Next.js App Router architecture, microservice backends, indexed MongoDB schemas, and responsive 3D interfaces.
-          </p>
-        </ScrollReveal>
+          {/* Bottom Telemetry Guide Indicator with Interactive Progress Line */}
+          <div className="flex items-center justify-between text-[11px] font-mono text-zinc-500 pt-2 border-t border-zinc-900 shrink-0">
+            <span className="flex items-center gap-2">
+              <span className="w-1.5 h-1.5 rounded-full bg-indigo-400 animate-pulse" />
+              <span>SCROLL TO ADVANCE CASE STUDIES</span>
+            </span>
 
-        {/* Progressive Pinned Stacking Card Deck Container */}
-        <div ref={containerRef} className="relative">
-          {projects.map((project, index) => (
-            <ProjectCard
-              key={project.id}
-              project={project}
-              index={index}
-              total={projects.length}
-              containerProgress={scrollYProgress}
-            />
-          ))}
-        </div>
+            {/* Micro Progress Bar */}
+            <div className="w-24 sm:w-36 h-1 bg-zinc-900 rounded-full overflow-hidden hidden sm:block border border-zinc-800">
+              <motion.div
+                style={{ width: progressWidth }}
+                className="h-full bg-gradient-to-r from-indigo-500 via-sky-400 to-indigo-400 rounded-full"
+              />
+            </div>
+
+            <span className="text-indigo-400">
+              {String(projects.length).padStart(2, "0")} ARCHITECTURAL SYSTEMS
+            </span>
+          </div>
+        </motion.div>
       </div>
     </section>
   );

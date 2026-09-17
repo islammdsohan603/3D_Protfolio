@@ -40,15 +40,17 @@ export const metadata: Metadata = {
   },
 };
 
+import SmoothScrollProvider from "@/components/providers/SmoothScrollProvider";
+
 export default function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${geistSans.variable} ${geistMono.variable} dark scroll-smooth`}>
+    <html lang="en" className={`${geistSans.variable} ${geistMono.variable} dark`}>
       <body className="bg-[#09090b] text-zinc-100 min-h-screen flex flex-col antialiased selection:bg-cyan-500 selection:text-black">
-        {children}
+        <SmoothScrollProvider>{children}</SmoothScrollProvider>
       </body>
     </html>
   );
