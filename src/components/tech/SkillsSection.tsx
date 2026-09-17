@@ -17,7 +17,7 @@ import {
 import { TECH_ITEMS, TechCategoryType, CategoryFilter } from "./techData";
 import TechBentoCard from "./TechBentoCard";
 import FrontierRadarPod from "./FrontierRadarPod";
-import { ScrollReveal, ScrollRevealStagger, ScrollRevealItem } from "../ui/ScrollReveal";
+import { ScrollReveal } from "../ui/ScrollReveal";
 
 // Dynamic import for Three.js 3D Orbital Canvas to avoid SSR issues
 const OrbitalSphere3D = dynamic(() => import("./OrbitalSphere3D"), {
@@ -82,7 +82,7 @@ export default function SkillsSection() {
       {/* Sci-Fi Background Glow & Ambient Elements */}
       <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[800px] h-[500px] bg-gradient-to-tr from-cyan-500/10 via-purple-500/5 to-emerald-500/5 blur-[140px] pointer-events-none rounded-full" />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12 relative z-10">
+      <div className="w-11/12 max-w-7xl mx-auto relative z-10">
         {/* Section Telemetry Header */}
         <ScrollReveal className="text-center space-y-4 mb-16">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 text-xs font-mono tracking-wider shadow-[0_0_15px_rgba(0,242,254,0.15)]">

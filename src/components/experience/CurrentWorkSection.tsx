@@ -25,7 +25,7 @@ import {
   SiMongodb,
   SiTailwindcss,
 } from "react-icons/si";
-import { ScrollReveal, ScrollRevealStagger, ScrollRevealItem } from "../ui/ScrollReveal";
+import { ScrollReveal } from "../ui/ScrollReveal";
 
 export default function CurrentWorkSection() {
   const [activeHudTab, setActiveHudTab] = useState<"terminal" | "architecture" | "telemetry">("terminal");
@@ -36,7 +36,7 @@ export default function CurrentWorkSection() {
       <div className="absolute top-1/3 left-1/4 w-[600px] h-[400px] bg-gradient-to-br from-cyan-500/10 via-indigo-500/10 to-purple-500/5 blur-[140px] pointer-events-none rounded-full" />
       <div className="absolute bottom-10 right-10 w-96 h-96 bg-emerald-500/5 rounded-full blur-3xl pointer-events-none" />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12 relative z-10">
+      <div className="w-11/12 max-w-7xl mx-auto relative z-10">
         {/* Section Header */}
         <ScrollReveal className="text-center space-y-4 mb-16">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-indigo-500/10 border border-indigo-500/30 text-indigo-400 text-xs font-mono tracking-wider shadow-[0_0_15px_rgba(99,102,241,0.2)]">

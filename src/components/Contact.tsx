@@ -72,7 +72,7 @@ export default function Contact() {
 
   return (
     <section id="contact" className="relative py-16 sm:py-20 md:py-24 lg:py-32 z-10 overflow-x-clip">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12">
+      <div className="w-11/12 max-w-7xl mx-auto">
         {/* Section Header */}
         <ScrollReveal className="text-center space-y-4 mb-16">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-mono tracking-wider">
@@ -89,7 +89,7 @@ export default function Contact() {
           </p>
         </ScrollReveal>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 max-w-6xl mx-auto">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
           {/* Left Column: Direct Info Cards */}
           <ScrollReveal direction="right" className="lg:col-span-5 space-y-6 w-full">
             <div className="glass-card p-6 rounded-3xl border border-white/10 space-y-6">

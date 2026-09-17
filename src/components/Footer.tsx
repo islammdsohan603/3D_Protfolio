@@ -10,17 +10,15 @@ export default function Footer() {
   };
 
   return (
-    <footer className="relative z-10 border-t border-white/10 bg-[#09090b]/90 py-12 sm:py-16 overflow-x-clip">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12 flex flex-col md:flex-row items-center justify-between gap-6">
+    <footer className="relative z-10 border-t border-zinc-800/80 bg-zinc-950/90 py-12 sm:py-16 overflow-x-clip">
+      <div className="w-11/12 max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
         <ScrollReveal direction="up" className="flex items-center gap-3">
-          <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-cyan-500 to-purple-600 p-[1px] shrink-0">
-            <div className="w-full h-full bg-[#09090b] rounded-[11px] flex items-center justify-center">
-              <Code2 className="w-4 h-4 text-cyan-400" />
-            </div>
+          <div className="w-9 h-9 rounded-xl bg-zinc-900 border border-zinc-800 p-[1px] shrink-0 flex items-center justify-center">
+            <Code2 className="w-4 h-4 text-zinc-300" />
           </div>
           <div>
-            <div className="text-sm font-bold text-white">MD. SOHAN ISLAM</div>
-            <div className="text-xs text-zinc-400 font-mono">
+            <div className="text-sm font-bold text-zinc-100">MD. SOHAN</div>
+            <div className="text-xs text-zinc-500 font-mono">
               &copy; {new Date().getFullYear()} All rights reserved.
             </div>
           </div>

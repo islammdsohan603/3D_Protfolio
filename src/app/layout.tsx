@@ -13,29 +13,28 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "MD. SOHAN ISLAM | Elite Full-Stack & 3D Web Specialist",
+  title: "MD. SOHAN | Full-Stack Engineer & Creative Technologist",
   description:
-    "Interactive 3D portfolio web application of MD. SOHAN ISLAM — Full-Stack Web Developer, Next.js Architect, Programming Hero Blackbelt Developer. Specializing in React, Next.js, TypeScript, Node.js, MongoDB, and Three.js.",
+    "Portfolio of MD. SOHAN — Full-Stack Engineer & Creative Technologist specializing in Next.js, React, TypeScript, Node.js, MongoDB, Three.js, and modern interactive architectures.",
   keywords: [
-    "MD. SOHAN ISLAM",
-    "Sohan Islam",
-    "Full-Stack Web Developer",
-    "Next.js Developer",
-    "Programming Hero Blackbelt",
-    "3D Web Specialist",
-    "React Developer",
+    "MD. SOHAN",
+    "Creative Technologist",
+    "Full-Stack Engineer",
+    "Next.js Architect",
     "TypeScript",
+    "React",
     "Node.js",
     "MongoDB",
-    "MERN Stack",
+    "Three.js",
+    "Awwwards Portfolio",
   ],
-  authors: [{ name: "MD. SOHAN ISLAM" }],
+  authors: [{ name: "MD. SOHAN" }],
   openGraph: {
-    title: "MD. SOHAN ISLAM | Elite Full-Stack & 3D Web Specialist",
+    title: "MD. SOHAN | Full-Stack Engineer & Creative Technologist",
     description:
-      "Interactive 3D portfolio web application of MD. SOHAN ISLAM. Recognized Programming Hero Blackbelt Developer.",
+      "Interactive portfolio of MD. SOHAN — Full-Stack Engineer & Creative Technologist specializing in scalable web systems and creative experiences.",
     url: "https://my-nextjs-protfolio.vercel.app/",
-    siteName: "MD. SOHAN ISLAM Portfolio",
+    siteName: "MD. SOHAN",
     locale: "en_US",
     type: "website",
   },

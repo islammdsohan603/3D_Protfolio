@@ -58,7 +58,7 @@ export default async function ProjectDetailPage({
       {/* Glassmorphic Navbar */}
       <Navbar />
 
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-32 pb-24">
+      <div className="relative z-10 w-11/12 max-w-7xl mx-auto pt-32 pb-24">
         {/* Top Back Navigation Bar */}
         <div className="mb-8">
           <Link

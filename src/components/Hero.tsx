@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { motion } from "framer-motion";
 import { Download, Mail, MessageCircle, ArrowRight, ShieldCheck, Terminal } from "lucide-react";
 import confetti from "canvas-confetti";
 import AntigravityCanvasWrapper from "./canvas/AntigravityCanvasWrapper";
@@ -87,15 +86,15 @@ export default function Hero() {
       {/* 3D Antigravity Canvas Background */}
       <AntigravityCanvasWrapper />
 
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12 flex flex-col lg:flex-row items-center justify-between gap-12 w-full">
+      <div className="relative z-10 w-11/12 max-w-7xl mx-auto flex flex-col lg:flex-row items-center justify-between gap-12">
         {/* Left Column: Text & CTAs */}
         <ScrollRevealStagger className="flex-1 text-center lg:text-left space-y-6 w-full">
           {/* Status Badge */}
           <ScrollRevealItem>
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/[0.04] border border-cyan-500/30 text-cyan-400 text-xs font-mono tracking-wide shadow-[0_0_15px_rgba(56,189,248,0.15)]">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-zinc-900/80 border border-zinc-800 text-zinc-400 text-xs font-mono tracking-wide shadow-sm">
               <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
               <span className="w-2 h-2 rounded-full bg-emerald-400 -ml-4" />
-              <span>AVAILABLE FOR HIRE & CONTRACTS</span>
+              <span className="text-zinc-300">AVAILABLE FOR HIRE & CONTRACTS</span>
             </div>
           </ScrollRevealItem>
 
@@ -105,10 +104,8 @@ export default function Hero() {
               <h2 className="text-lg sm:text-xl md:text-2xl font-mono text-zinc-400 font-light">
                 Hello, World! 👋 I&apos;m
               </h2>
-              <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight text-white leading-tight sm:leading-none">
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-indigo-400 to-purple-400">
-                  MD. SOHAN ISLAM
-                </span>
+              <h1 className="text-4xl sm:text-6xl md:text-7xl font-extrabold tracking-tight text-zinc-100 leading-tight sm:leading-none">
+                MD. SOHAN
               </h1>
             </div>
           </ScrollRevealItem>
@@ -116,10 +113,10 @@ export default function Hero() {
           {/* Typing Role Animation */}
           <ScrollRevealItem>
             <div className="h-12 flex items-center justify-center lg:justify-start">
-              <div className="flex items-center gap-2 text-lg sm:text-2xl lg:text-3xl font-bold font-mono text-cyan-400">
+              <div className="flex items-center gap-2 text-lg sm:text-2xl lg:text-3xl font-bold font-mono text-indigo-400">
                 <Terminal className="w-6 h-6 sm:w-7 sm:h-7 text-indigo-400" />
                 <span>{displayText}</span>
-                <span className="w-1 h-7 bg-cyan-400 animate-pulse" />
+                <span className="w-1 h-7 bg-indigo-400 animate-pulse" />
               </div>
             </div>
           </ScrollRevealItem>
@@ -127,30 +124,30 @@ export default function Hero() {
           {/* Value proposition paragraph */}
           <ScrollRevealItem>
             <p className="max-w-2xl text-sm sm:text-base md:text-lg text-zinc-400 font-light leading-relaxed mx-auto lg:mx-0">
-              Passionate Full-Stack Web Developer crafting high-performance 3D interactive web applications, robust Next.js architectures, and scalable REST APIs. Recognized as a <span className="text-cyan-400 font-medium">Programming Hero Blackbelt Developer</span>.
+              Creative Technologist & Full-Stack Engineer crafting high-performance interactive web experiences, robust Next.js App Router architectures, and scalable cloud systems. Recognized as a <span className="text-zinc-200 font-medium">Programming Hero Blackbelt Developer</span>.
             </p>
           </ScrollRevealItem>
 
           {/* CTA Buttons */}
           <ScrollRevealItem>
             <div className="pt-4 flex flex-wrap items-center justify-center lg:justify-start gap-4">
-              {/* Download Resume Button */}
+              {/* Download Resume Button — Accent CTA */}
               <button
                 onClick={handleDownloadResume}
-                className="px-6 sm:px-7 py-3.5 rounded-xl font-bold text-xs sm:text-sm text-black bg-gradient-to-r from-cyan-400 via-indigo-400 to-indigo-500 hover:from-cyan-300 hover:to-indigo-400 shadow-[0_0_25px_rgba(56,189,248,0.3)] hover:shadow-[0_0_35px_rgba(99,102,241,0.5)] transition-all duration-300 flex items-center gap-2 group cursor-pointer min-h-[44px]"
+                className="bg-indigo-600 hover:bg-indigo-500 text-white font-medium text-xs sm:text-sm px-6 sm:px-7 py-3 rounded-lg transition-colors duration-200 flex items-center gap-2 cursor-pointer shadow-sm min-h-[44px]"
               >
-                <Download className="w-4 h-4 sm:w-5 sm:h-5 group-hover:translate-y-0.5 transition-transform text-black" />
+                <Download className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
                 <span>Download CV / Resume</span>
               </button>
 
-              {/* Contact Me */}
+              {/* Contact Me — Primary CTA */}
               <a
                 href="#contact"
-                className="px-6 sm:px-7 py-3.5 rounded-xl font-semibold text-xs sm:text-sm text-zinc-200 bg-white/[0.04] hover:bg-white/[0.08] border border-white/[0.1] hover:border-cyan-400/40 transition-all duration-300 flex items-center gap-2 group min-h-[44px]"
+                className="border border-zinc-700 bg-zinc-900 hover:bg-zinc-800 text-zinc-100 text-xs sm:text-sm font-medium px-6 sm:px-7 py-3 rounded-lg shadow-sm transition-all duration-300 flex items-center gap-2 group min-h-[44px]"
               >
-                <Mail className="w-4 h-4 sm:w-5 sm:h-5 text-cyan-400 group-hover:scale-110 transition-transform" />
+                <Mail className="w-4 h-4 sm:w-5 sm:h-5 text-zinc-400 group-hover:text-zinc-200 transition-colors" />
                 <span>Contact Me</span>
-                <ArrowRight className="w-4 h-4 text-cyan-400 group-hover:translate-x-1 transition-transform" />
+                <ArrowRight className="w-4 h-4 text-zinc-400 group-hover:translate-x-1 transition-transform" />
               </a>
 
               {/* WhatsApp Direct */}
@@ -158,9 +155,9 @@ export default function Hero() {
                 href="https://wa.me/8801849468455"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="px-5 py-3.5 rounded-xl font-semibold text-xs sm:text-sm text-emerald-400 bg-emerald-500/10 hover:bg-emerald-500/20 border border-emerald-500/30 transition-all duration-300 flex items-center gap-2 min-h-[44px]"
+                className="border border-zinc-800 bg-zinc-900/60 hover:bg-zinc-800 text-zinc-300 hover:text-white text-xs sm:text-sm font-medium px-5 py-3 rounded-lg transition-all duration-200 flex items-center gap-2 min-h-[44px]"
               >
-                <MessageCircle className="w-4 h-4 sm:w-5 sm:h-5" />
+                <MessageCircle className="w-4 h-4 sm:w-5 sm:h-5 text-emerald-400" />
                 <span>WhatsApp</span>
               </a>
             </div>
@@ -217,7 +214,7 @@ export default function Hero() {
                   <div className="w-full h-full rounded-full bg-[#08090a] flex items-center justify-center overflow-hidden">
                     <Image
                       src="/sohanimage.png"
-                      alt="MD. SOHAN ISLAM"
+                      alt="MD. SOHAN"
                       width={250}
                       height={250}
                       className="w-full h-full object-cover object-center rounded-full"
@@ -225,8 +222,8 @@ export default function Hero() {
                   </div>
                 </div>
 
-                <h3 className="text-lg sm:text-2xl font-extrabold text-white tracking-tight">MD. SOHAN ISLAM</h3>
-                <p className="text-xs font-mono text-cyan-400 mt-1">Full-Stack Web Developer</p>
+                <h3 className="text-lg sm:text-2xl font-extrabold text-zinc-100 tracking-tight">MD.SOHAN</h3>
+                <p className="text-xs font-mono text-indigo-400 mt-1">Creative Technologist</p>
 
                 {/* Verified Tag */}
                 <div

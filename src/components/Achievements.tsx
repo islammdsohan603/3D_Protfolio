@@ -60,7 +60,7 @@ export default function Achievements() {
 
   return (
     <section id="achievements" className="relative py-16 sm:py-20 md:py-24 lg:py-32 z-10 overflow-x-clip">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12">
+      <div className="w-11/12 max-w-7xl mx-auto">
         {/* Section Header */}
         <ScrollReveal className="text-center space-y-4 mb-16">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-400 text-xs font-mono tracking-wider">
@@ -78,7 +78,7 @@ export default function Achievements() {
         </ScrollReveal>
 
         {/* Cards Grid */}
-        <ScrollRevealStagger className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+        <ScrollRevealStagger className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {ACHIEVEMENTS_DATA.map((item) => (
             <ScrollRevealItem key={item.id} className="h-full">
               <AchievementCard

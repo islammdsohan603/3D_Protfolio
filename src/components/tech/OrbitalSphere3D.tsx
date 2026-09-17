@@ -20,16 +20,24 @@ function AntigravityParticles({ count = 160 }: { count?: number }) {
     ];
 
     for (let i = 0; i < count; i++) {
-      // Radius between 2.2 and 4.2
-      const radius = 2.2 + Math.random() * 2.0;
-      const theta = Math.random() * Math.PI * 2;
-      const phi = Math.acos(2 * Math.random() - 1);
+      // Deterministic pseudo-random generation to ensure component purity
+      const seed1 = Math.sin(i * 12.9898 + 78.233) * 43758.5453;
+      const rand1 = seed1 - Math.floor(seed1);
+      const seed2 = Math.sin(i * 39.346 + 11.135) * 43758.5453;
+      const rand2 = seed2 - Math.floor(seed2);
+      const seed3 = Math.sin(i * 73.156 + 45.164) * 43758.5453;
+      const rand3 = seed3 - Math.floor(seed3);
+
+      const radius = 2.2 + rand1 * 2.0;
+      const theta = rand2 * Math.PI * 2;
+      const phi = Math.acos(2 * rand3 - 1);
 
       pos[i * 3] = radius * Math.sin(phi) * Math.cos(theta);
       pos[i * 3 + 1] = radius * Math.sin(phi) * Math.sin(theta);
       pos[i * 3 + 2] = radius * Math.cos(phi);
 
-      const color = colorChoices[Math.floor(Math.random() * colorChoices.length)];
+      const colorIndex = Math.floor(rand1 * colorChoices.length) % colorChoices.length;
+      const color = colorChoices[colorIndex];
       col[i * 3] = color.r;
       col[i * 3 + 1] = color.g;
       col[i * 3 + 2] = color.b;

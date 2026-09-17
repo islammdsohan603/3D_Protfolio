@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState } from "react";
-import { motion } from "framer-motion";
 import { User, ShieldCheck, Terminal, Rocket, Cpu } from "lucide-react";
 import Image from "next/image";
 import { ScrollReveal, ScrollRevealStagger, ScrollRevealItem } from "./ui/ScrollReveal";
@@ -123,16 +122,16 @@ export default function About() {
 
   return (
     <section id="about" className="relative py-16 sm:py-20 md:py-24 lg:py-32 z-10 overflow-x-clip">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12">
+      <div className="w-11/12 max-w-7xl mx-auto">
         {/* Section Header */}
         <ScrollReveal className="text-center space-y-4 mb-16">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 text-xs font-mono tracking-wider">
-            <User className="w-4 h-4 text-cyan-400" />
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-zinc-900/80 border border-zinc-800 text-zinc-400 text-xs font-mono tracking-wider">
+            <User className="w-4 h-4 text-indigo-400" />
             <span>BIOGRAPHY & BACKGROUND</span>
           </div>
 
-          <h2 className="text-3xl sm:text-5xl font-extrabold text-white tracking-tight">
-            About <span className="text-gradient-cyan">MD. SOHAN ISLAM</span>
+          <h2 className="text-3xl sm:text-5xl font-extrabold text-zinc-100 tracking-tight">
+            About <span className="text-indigo-400">MD. SOHAN</span>
           </h2>
 
           <p className="max-w-2xl mx-auto text-zinc-400 text-sm sm:text-base font-light">
@@ -151,32 +150,32 @@ export default function About() {
                 transformStyle: "preserve-3d",
                 transform: `perspective(1000px) rotateX(${profileRotateX}deg) rotateY(${profileRotateY}deg)`,
               }}
-              className="relative glass-card p-4 sm:p-5 rounded-3xl border border-cyan-500/40 glow-cyan max-w-md w-full transition-all duration-200 group"
+              className="relative glass-card p-4 sm:p-5 rounded-3xl border border-zinc-800/80 max-w-md w-full transition-all duration-200 group"
             >
               {/* Profile Image Wrapper */}
-              <div className="relative rounded-2xl overflow-hidden aspect-[4/5] bg-slate-900 border border-white/10">
+              <div className="relative rounded-2xl overflow-hidden aspect-[4/5] bg-zinc-900 border border-zinc-800">
                 <Image
                   src="/sohanimage.png"
-                  alt="MD. SOHAN ISLAM Profile Photo"
+                  alt="MD. SOHAN Profile Photo"
                   width={600}
                   height={750}
                   className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700"
                 />
 
                 {/* Cyberpunk Gradient Overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent opacity-80 pointer-events-none" />
+                <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/20 to-transparent opacity-80 pointer-events-none" />
 
                 {/* Floating Overlay Badge */}
                 <div
                   style={{ transform: "translateZ(35px)" }}
-                  className="absolute bottom-5 left-5 right-5 p-4 rounded-xl glass-card border border-white/15 backdrop-blur-md"
+                  className="absolute bottom-5 left-5 right-5 p-4 rounded-xl glass-card border border-zinc-800 backdrop-blur-md"
                 >
-                  <div className="flex items-center gap-2 text-cyan-400 font-mono text-xs font-semibold mb-1">
+                  <div className="flex items-center gap-2 text-indigo-400 font-mono text-xs font-semibold mb-1">
                     <ShieldCheck className="w-4 h-4 text-emerald-400" />
                     <span>Programming Hero Blackbelt</span>
                   </div>
-                  <h3 className="text-lg sm:text-xl font-bold text-white tracking-wide">MD. SOHAN ISLAM</h3>
-                  <p className="text-xs text-zinc-300 font-mono">Full-Stack Web Developer & Next.js Specialist</p>
+                  <h3 className="text-lg sm:text-xl font-bold text-zinc-100 tracking-wide">MD. SOHAN</h3>
+                  <p className="text-xs text-zinc-400 font-mono">Creative Technologist & Next.js Specialist</p>
                 </div>
               </div>
             </div>
@@ -186,18 +185,18 @@ export default function About() {
           <div className="lg:col-span-7 space-y-8">
             {/* Bio Narrative Card */}
             <ScrollReveal direction="left">
-              <div className="glass-card p-6 sm:p-8 rounded-3xl border border-white/10 space-y-4">
-                <div className="flex items-center gap-2 text-xs font-mono text-cyan-400 uppercase tracking-wider">
-                  <Terminal className="w-4 h-4 text-purple-400" />
+              <div className="glass-card p-6 sm:p-8 rounded-3xl border border-zinc-800/80 space-y-4">
+                <div className="flex items-center gap-2 text-xs font-mono text-indigo-400 uppercase tracking-wider">
+                  <Terminal className="w-4 h-4 text-indigo-400" />
                   <span>Developer Journey</span>
                 </div>
 
-                <h3 className="text-2xl sm:text-3xl font-bold text-white leading-snug">
+                <h3 className="text-2xl sm:text-3xl font-bold text-zinc-100 leading-snug">
                   Engineering Modern, High-Performance Web Applications
                 </h3>
 
                 <p className="text-zinc-300 text-sm sm:text-base leading-relaxed font-light">
-                  Hello! I&apos;m <strong className="text-white font-semibold">MD. SOHAN ISLAM</strong>, a passionate Full-Stack Web Developer based in Bangladesh. My passion lies in building scalable, user-focused web applications with clean Next.js App Router architecture, TypeScript, React, Node.js, Express, and MongoDB.
+                  Hello! I&apos;m <strong className="text-zinc-100 font-semibold">MD. SOHAN</strong>, a passionate Full-Stack Web Developer based in Bangladesh. My passion lies in building scalable, user-focused web applications with clean Next.js App Router architecture, TypeScript, React, Node.js, Express, and MongoDB.
                 </p>
 
                 <p className="text-zinc-300 text-sm sm:text-base leading-relaxed font-light">
