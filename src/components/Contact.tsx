@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import { motion } from "framer-motion";
-import { Mail, Phone, MapPin, Send, MessageCircle, CheckCircle2 } from "lucide-react";
+import { Mail, Phone, MapPin, Send, MessageCircle, CheckCircle2, AlertCircle } from "lucide-react";
 import { FaGithub, FaLinkedin, FaWhatsapp } from "react-icons/fa6";
 import confetti from "canvas-confetti";
 
@@ -14,28 +14,59 @@ export default function Contact() {
     message: "",
   });
   const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
+  const [errorMessage, setErrorMessage] = useState<string>("");
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
+    if (status === "error") {
+      setStatus("idle");
+      setErrorMessage("");
+    }
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!formData.name || !formData.email || !formData.message) return;
 
     setStatus("submitting");
+    setErrorMessage("");
 
-    setTimeout(() => {
-      setStatus("success");
-      confetti({
-        particleCount: 90,
-        spread: 70,
-        origin: { y: 0.6 },
-        colors: ["#00f2fe", "#9d4edd", "#10b981"],
+    try {
+      const backendUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
+      const response = await fetch(`${backendUrl}/api/contact`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
       });
-      setFormData({ name: "", email: "", subject: "", message: "" });
-      setTimeout(() => setStatus("idle"), 5000);
-    }, 1200);
+
+      const data = await response.json();
+
+      if (response.ok && data.success) {
+        setStatus("success");
+        try {
+          confetti({
+            particleCount: 90,
+            spread: 70,
+            origin: { y: 0.6 },
+            colors: ["#00f2fe", "#9d4edd", "#10b981"],
+          });
+        } catch {
+          // Fallback gracefully if confetti fails
+        }
+        setFormData({ name: "", email: "", subject: "", message: "" });
+      } else {
+        setStatus("error");
+        setErrorMessage(data.message || "Something went wrong. Please try again.");
+      }
+    } catch (err: unknown) {
+      console.error("Contact Form submission error:", err);
+      setStatus("error");
+      setErrorMessage("Unable to connect to server. Please check your internet connection or try again later.");
+    }
   };
 
   return (
@@ -239,15 +270,32 @@ export default function Contact() {
                 )}
               </button>
 
-              {/* Status Toast Feedback */}
+              {/* Status Toast / Banner Feedback */}
               {status === "success" && (
                 <motion.div
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
-                  className="p-4 rounded-xl bg-emerald-500/20 border border-emerald-500/40 text-emerald-300 text-sm flex items-center gap-3"
+                  className="p-4 rounded-xl bg-emerald-500/20 border border-emerald-500/40 text-emerald-300 text-sm flex items-start gap-3 shadow-lg"
                 >
-                  <CheckCircle2 className="w-5 h-5 text-emerald-400 shrink-0" />
-                  <span>Thank you! Your message has been sent successfully. I will get back to you shortly.</span>
+                  <CheckCircle2 className="w-5 h-5 text-emerald-400 shrink-0 mt-0.5" />
+                  <div>
+                    <p className="font-semibold text-emerald-200 mb-0.5">Success!</p>
+                    <p>Thank you! Your message has been sent successfully. I will get back to you within 24 hours.</p>
+                  </div>
+                </motion.div>
+              )}
+
+              {status === "error" && (
+                <motion.div
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className="p-4 rounded-xl bg-rose-500/20 border border-rose-500/40 text-rose-300 text-sm flex items-start gap-3 shadow-lg"
+                >
+                  <AlertCircle className="w-5 h-5 text-rose-400 shrink-0 mt-0.5" />
+                  <div>
+                    <p className="font-semibold text-rose-200 mb-0.5">Submission Error</p>
+                    <p>{errorMessage || "Failed to send message. Please try again later."}</p>
+                  </div>
                 </motion.div>
               )}
             </form>
