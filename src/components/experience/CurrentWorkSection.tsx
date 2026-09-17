@@ -8,20 +8,14 @@ import {
   Calendar,
   MapPin,
   CheckCircle2,
-  Sparkles,
-  ShieldCheck,
   Zap,
   Terminal,
-  Cpu,
   Globe,
-  FileText,
   Layers,
   Lock,
-  Server,
   TrendingUp,
   Activity,
-  ArrowUpRight,
-  Code2,
+  ShieldCheck,
 } from "lucide-react";
 import {
   SiNextdotjs,
@@ -31,47 +25,36 @@ import {
   SiMongodb,
   SiTailwindcss,
 } from "react-icons/si";
+import { ScrollReveal, ScrollRevealStagger, ScrollRevealItem } from "../ui/ScrollReveal";
 
 export default function CurrentWorkSection() {
   const [activeHudTab, setActiveHudTab] = useState<"terminal" | "architecture" | "telemetry">("terminal");
 
   return (
-    <section id="experience" className="relative py-28 z-10 overflow-hidden bg-[#08090b]">
+    <section id="experience" className="relative py-16 sm:py-20 md:py-24 lg:py-32 z-10 overflow-x-clip bg-[#08090b]">
       {/* Sci-Fi Ambient Glow Backdrop */}
       <div className="absolute top-1/3 left-1/4 w-[600px] h-[400px] bg-gradient-to-br from-cyan-500/10 via-indigo-500/10 to-purple-500/5 blur-[140px] pointer-events-none rounded-full" />
       <div className="absolute bottom-10 right-10 w-96 h-96 bg-emerald-500/5 rounded-full blur-3xl pointer-events-none" />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12 relative z-10">
         {/* Section Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="text-center space-y-4 mb-16"
-        >
+        <ScrollReveal className="text-center space-y-4 mb-16">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-indigo-500/10 border border-indigo-500/30 text-indigo-400 text-xs font-mono tracking-wider shadow-[0_0_15px_rgba(99,102,241,0.2)]">
             <Briefcase className="w-4 h-4 text-indigo-400" />
             <span>LIVE INDUSTRY ENGINEERING</span>
           </div>
 
-          <h2 className="text-3xl sm:text-6xl font-extrabold text-white tracking-tight">
+          <h2 className="text-3xl sm:text-5xl md:text-6xl font-extrabold text-white tracking-tight">
             Work Experience & <span className="text-gradient-cyan">Active Production</span>
           </h2>
 
           <p className="max-w-3xl mx-auto text-zinc-400 text-sm sm:text-base leading-relaxed">
             Delivering high-availability web architectures, production news media platforms, and high-throughput REST API services.
           </p>
-        </motion.div>
+        </ScrollReveal>
 
         {/* Main Bento Spotlight Experience Card */}
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.7 }}
-          className="relative rounded-3xl bg-zinc-900/60 border border-zinc-800/90 backdrop-blur-2xl p-6 sm:p-10 shadow-2xl overflow-hidden group"
-        >
+        <ScrollReveal direction="up" delay={0.1} className="relative rounded-3xl bg-zinc-900/60 border border-zinc-800/90 backdrop-blur-2xl p-6 sm:p-10 shadow-2xl overflow-hidden group">
           {/* Ambient Card Border Torch Effect */}
           <div className="absolute -inset-px rounded-3xl bg-gradient-to-r from-cyan-500/20 via-indigo-500/20 to-purple-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
 
@@ -118,7 +101,7 @@ export default function CurrentWorkSection() {
 
           {/* Asymmetric 2-Column Content Layout */}
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start relative z-10">
-            {/* Left Column (Recruiter Signal & Impact Highlights) */}
+            {/* Left Column (Context & Impact) */}
             <div className="lg:col-span-7 space-y-6">
               {/* Senior-Leaning Architectural Metrics */}
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
@@ -230,7 +213,7 @@ export default function CurrentWorkSection() {
               </div>
             </div>
 
-            {/* Right Column (Interactive Terminal & Telemetry HUD Window) */}
+            {/* Right Column (Terminal HUD Window) */}
             <div className="lg:col-span-5 w-full">
               <div className="rounded-2xl bg-slate-950 border border-zinc-800 shadow-2xl overflow-hidden font-mono text-xs">
                 {/* HUD Header Bar & Tabs */}
@@ -247,7 +230,7 @@ export default function CurrentWorkSection() {
                   <div className="flex items-center gap-1 bg-slate-950 p-1 rounded-lg border border-white/5">
                     <button
                       onClick={() => setActiveHudTab("terminal")}
-                      className={`px-2.5 py-1 rounded-md transition-colors cursor-pointer text-[10px] ${
+                      className={`px-2.5 py-1 rounded-md transition-colors cursor-pointer text-[10px] min-h-[36px] ${
                         activeHudTab === "terminal"
                           ? "bg-cyan-500/20 text-cyan-300 font-bold border border-cyan-500/30"
                           : "text-zinc-400 hover:text-white"
@@ -257,7 +240,7 @@ export default function CurrentWorkSection() {
                     </button>
                     <button
                       onClick={() => setActiveHudTab("architecture")}
-                      className={`px-2.5 py-1 rounded-md transition-colors cursor-pointer text-[10px] ${
+                      className={`px-2.5 py-1 rounded-md transition-colors cursor-pointer text-[10px] min-h-[36px] ${
                         activeHudTab === "architecture"
                           ? "bg-purple-500/20 text-purple-300 font-bold border border-purple-500/30"
                           : "text-zinc-400 hover:text-white"
@@ -267,7 +250,7 @@ export default function CurrentWorkSection() {
                     </button>
                     <button
                       onClick={() => setActiveHudTab("telemetry")}
-                      className={`px-2.5 py-1 rounded-md transition-colors cursor-pointer text-[10px] ${
+                      className={`px-2.5 py-1 rounded-md transition-colors cursor-pointer text-[10px] min-h-[36px] ${
                         activeHudTab === "telemetry"
                           ? "bg-emerald-500/20 text-emerald-300 font-bold border border-emerald-500/30"
                           : "text-zinc-400 hover:text-white"
@@ -416,7 +399,7 @@ export default function CurrentWorkSection() {
               </div>
             </div>
           </div>
-        </motion.div>
+        </ScrollReveal>
       </div>
     </section>
   );

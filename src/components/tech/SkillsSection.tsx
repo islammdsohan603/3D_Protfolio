@@ -11,13 +11,13 @@ import {
   Cloud,
   Radio,
   Sparkles,
-  Filter,
   CheckCircle2,
   Zap,
 } from "lucide-react";
 import { TECH_ITEMS, TechCategoryType, CategoryFilter } from "./techData";
 import TechBentoCard from "./TechBentoCard";
 import FrontierRadarPod from "./FrontierRadarPod";
+import { ScrollReveal, ScrollRevealStagger, ScrollRevealItem } from "../ui/ScrollReveal";
 
 // Dynamic import for Three.js 3D Orbital Canvas to avoid SSR issues
 const OrbitalSphere3D = dynamic(() => import("./OrbitalSphere3D"), {
@@ -78,25 +78,19 @@ export default function SkillsSection() {
   }, []);
 
   return (
-    <section id="skills" className="relative py-28 z-10 overflow-hidden bg-[#09090b]">
+    <section id="skills" className="relative py-16 sm:py-20 md:py-24 lg:py-32 z-10 overflow-x-clip bg-[#09090b]">
       {/* Sci-Fi Background Glow & Ambient Elements */}
       <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[800px] h-[500px] bg-gradient-to-tr from-cyan-500/10 via-purple-500/5 to-emerald-500/5 blur-[140px] pointer-events-none rounded-full" />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12 relative z-10">
         {/* Section Telemetry Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="text-center space-y-4 mb-16"
-        >
+        <ScrollReveal className="text-center space-y-4 mb-16">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 text-xs font-mono tracking-wider shadow-[0_0_15px_rgba(0,242,254,0.15)]">
             <Cpu className="w-4 h-4 text-cyan-400" />
             <span>INTERACTIVE TECH BENTO & ORBITAL HUD</span>
           </div>
 
-          <h2 className="text-3xl sm:text-6xl font-extrabold text-white tracking-tight">
+          <h2 className="text-3xl sm:text-5xl md:text-6xl font-extrabold text-white tracking-tight">
             Skills & <span className="text-gradient-cyan">Tech Ecosystem</span>
           </h2>
 
@@ -119,16 +113,10 @@ export default function SkillsSection() {
               <span>90%+ MASTERY: <strong className="text-purple-400">{stats.mastered}</strong></span>
             </div>
           </div>
-        </motion.div>
+        </ScrollReveal>
 
         {/* 3D Central Orbital Node Matrix Showcase */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.95 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-          className="mb-16 rounded-3xl bg-slate-950/60 border border-zinc-800/90 backdrop-blur-2xl p-4 sm:p-6 shadow-2xl relative overflow-hidden"
-        >
+        <ScrollReveal direction="up" delay={0.1} className="mb-16 rounded-3xl bg-slate-950/60 border border-zinc-800/90 backdrop-blur-2xl p-4 sm:p-6 shadow-2xl relative overflow-hidden">
           <div className="flex items-center justify-between px-4 py-2 mb-2 border-b border-white/5 text-xs font-mono text-zinc-400">
             <div className="flex items-center gap-2">
               <Sparkles className="w-4 h-4 text-cyan-400" />
@@ -138,10 +126,10 @@ export default function SkillsSection() {
           </div>
 
           <OrbitalSphere3D />
-        </motion.div>
+        </ScrollReveal>
 
         {/* Perspective Category Filter Switcher Tabs */}
-        <div className="flex justify-center mb-12">
+        <ScrollReveal direction="up" delay={0.15} className="flex justify-center mb-12">
           <div className="inline-flex flex-wrap items-center justify-center gap-2 bg-zinc-950/90 p-2 rounded-2xl border border-zinc-800 backdrop-blur-xl shadow-xl">
             {CATEGORY_FILTERS.map((tab) => {
               const isActive = activeCategory === tab.id;
@@ -149,7 +137,7 @@ export default function SkillsSection() {
                 <button
                   key={tab.id}
                   onClick={() => setActiveCategory(tab.id)}
-                  className={`relative flex items-center gap-2 px-5 py-3 rounded-xl text-xs sm:text-sm font-semibold transition-all duration-300 cursor-pointer ${
+                  className={`relative flex items-center gap-2 px-4 sm:px-5 py-2.5 sm:py-3 rounded-xl text-xs sm:text-sm font-semibold transition-all duration-300 cursor-pointer min-h-[44px] ${
                     isActive
                       ? "text-white"
                       : "text-zinc-400 hover:text-white hover:bg-white/5"
@@ -183,7 +171,7 @@ export default function SkillsSection() {
               );
             })}
           </div>
-        </div>
+        </ScrollReveal>
 
         {/* Bento Grid Layout Container */}
         <AnimatePresence mode="wait">
@@ -203,15 +191,9 @@ export default function SkillsSection() {
 
         {/* Dedicated Highlight Pod for Active Frontier Radar */}
         {(activeCategory === "all" || activeCategory === "frontier") && (
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="mt-16"
-          >
+          <ScrollReveal direction="up" delay={0.2} className="mt-16">
             <FrontierRadarPod />
-          </motion.div>
+          </ScrollReveal>
         )}
       </div>
     </section>

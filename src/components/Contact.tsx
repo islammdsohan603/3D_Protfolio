@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import { Mail, Phone, MapPin, Send, MessageCircle, CheckCircle2, AlertCircle } from "lucide-react";
 import { FaGithub, FaLinkedin, FaWhatsapp } from "react-icons/fa6";
 import confetti from "canvas-confetti";
+import { ScrollReveal } from "./ui/ScrollReveal";
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -55,7 +56,7 @@ export default function Contact() {
             colors: ["#00f2fe", "#9d4edd", "#10b981"],
           });
         } catch {
-          // Fallback gracefully if confetti fails
+          // Fallback gracefully
         }
         setFormData({ name: "", email: "", subject: "", message: "" });
       } else {
@@ -70,16 +71,10 @@ export default function Contact() {
   };
 
   return (
-    <section id="contact" className="relative py-24 z-10">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="contact" className="relative py-16 sm:py-20 md:py-24 lg:py-32 z-10 overflow-x-clip">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12">
         {/* Section Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="text-center space-y-4 mb-16"
-        >
+        <ScrollReveal className="text-center space-y-4 mb-16">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-mono tracking-wider">
             <MessageCircle className="w-4 h-4 text-emerald-400" />
             <span>LET&apos;S WORK TOGETHER</span>
@@ -89,37 +84,31 @@ export default function Contact() {
             Get In <span className="text-gradient-cyan">Touch</span>
           </h2>
 
-          <p className="max-w-2xl mx-auto text-zinc-400 text-sm sm:text-base">
+          <p className="max-w-2xl mx-auto text-zinc-400 text-sm sm:text-base font-light">
             Have a project idea, web application development request, or contract inquiry? Reach out directly via form, email, or WhatsApp.
           </p>
-        </motion.div>
+        </ScrollReveal>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 max-w-6xl mx-auto">
           {/* Left Column: Direct Info Cards */}
-          <motion.div
-            initial={{ opacity: 0, x: -40 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="lg:col-span-5 space-y-6"
-          >
+          <ScrollReveal direction="right" className="lg:col-span-5 space-y-6 w-full">
             <div className="glass-card p-6 rounded-3xl border border-white/10 space-y-6">
               <h3 className="text-2xl font-bold text-white mb-2">Direct Contact Details</h3>
-              <p className="text-zinc-400 text-sm leading-relaxed">
+              <p className="text-zinc-400 text-sm leading-relaxed font-light">
                 Feel free to reach out anytime. I respond promptly to all messages and project inquiries.
               </p>
 
               {/* Email Card */}
               <a
                 href="mailto:islammdsohan603@gmail.com"
-                className="flex items-center gap-4 p-4 rounded-2xl bg-slate-900/80 border border-white/5 hover:border-cyan-400/50 transition-all group"
+                className="flex items-center gap-4 p-4 rounded-2xl bg-slate-900/80 border border-white/5 hover:border-cyan-400/50 transition-all group min-h-[44px]"
               >
-                <div className="w-12 h-12 rounded-xl bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center text-cyan-400 group-hover:scale-110 transition-transform">
+                <div className="w-12 h-12 rounded-xl bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center text-cyan-400 group-hover:scale-110 transition-transform shrink-0">
                   <Mail className="w-6 h-6" />
                 </div>
                 <div>
                   <div className="text-xs font-mono text-zinc-400 uppercase">Email Address</div>
-                  <div className="text-sm sm:text-base font-semibold text-white group-hover:text-cyan-400 transition-colors">
+                  <div className="text-sm sm:text-base font-semibold text-white group-hover:text-cyan-400 transition-colors break-all">
                     islammdsohan603@gmail.com
                   </div>
                 </div>
@@ -130,9 +119,9 @@ export default function Contact() {
                 href="https://wa.me/8801849468455"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-4 p-4 rounded-2xl bg-slate-900/80 border border-white/5 hover:border-emerald-400/50 transition-all group"
+                className="flex items-center gap-4 p-4 rounded-2xl bg-slate-900/80 border border-white/5 hover:border-emerald-400/50 transition-all group min-h-[44px]"
               >
-                <div className="w-12 h-12 rounded-xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400 group-hover:scale-110 transition-transform">
+                <div className="w-12 h-12 rounded-xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400 group-hover:scale-110 transition-transform shrink-0">
                   <Phone className="w-6 h-6" />
                 </div>
                 <div>
@@ -144,8 +133,8 @@ export default function Contact() {
               </a>
 
               {/* Location Card */}
-              <div className="flex items-center gap-4 p-4 rounded-2xl bg-slate-900/80 border border-white/5">
-                <div className="w-12 h-12 rounded-xl bg-purple-500/10 border border-purple-500/30 flex items-center justify-center text-purple-400">
+              <div className="flex items-center gap-4 p-4 rounded-2xl bg-slate-900/80 border border-white/5 min-h-[44px]">
+                <div className="w-12 h-12 rounded-xl bg-purple-500/10 border border-purple-500/30 flex items-center justify-center text-purple-400 shrink-0">
                   <MapPin className="w-6 h-6" />
                 </div>
                 <div>
@@ -158,12 +147,12 @@ export default function Contact() {
             </div>
 
             {/* Social Links Bar */}
-            <div className="glass-card p-6 rounded-3xl border border-white/10 flex items-center justify-around">
+            <div className="glass-card p-6 rounded-3xl border border-white/10 flex flex-wrap items-center justify-around gap-4">
               <a
                 href="https://github.com/islammdsohan603"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-2 text-zinc-300 hover:text-cyan-400 transition-colors font-medium text-sm"
+                className="flex items-center gap-2 text-zinc-300 hover:text-cyan-400 transition-colors font-medium text-sm min-h-[44px]"
               >
                 <FaGithub className="w-5 h-5" />
                 <span>GitHub</span>
@@ -173,7 +162,7 @@ export default function Contact() {
                 href="https://www.linkedin.com/in/sohanislamwebdev/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-2 text-zinc-300 hover:text-cyan-400 transition-colors font-medium text-sm"
+                className="flex items-center gap-2 text-zinc-300 hover:text-cyan-400 transition-colors font-medium text-sm min-h-[44px]"
               >
                 <FaLinkedin className="w-5 h-5 text-sky-400" />
                 <span>LinkedIn</span>
@@ -183,23 +172,17 @@ export default function Contact() {
                 href="https://wa.me/8801849468455"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-2 text-emerald-400 hover:text-emerald-300 transition-colors font-medium text-sm"
+                className="flex items-center gap-2 text-emerald-400 hover:text-emerald-300 transition-colors font-medium text-sm min-h-[44px]"
               >
                 <FaWhatsapp className="w-5 h-5" />
                 <span>WhatsApp</span>
               </a>
             </div>
-          </motion.div>
+          </ScrollReveal>
 
           {/* Right Column: Contact Form */}
-          <motion.div
-            initial={{ opacity: 0, x: 40 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="lg:col-span-7"
-          >
-            <form onSubmit={handleSubmit} className="glass-card p-8 rounded-3xl border border-white/10 space-y-6">
+          <ScrollReveal direction="left" className="lg:col-span-7 w-full">
+            <form onSubmit={handleSubmit} className="glass-card p-6 sm:p-8 rounded-3xl border border-white/10 space-y-6">
               <h3 className="text-2xl font-bold text-white mb-4">Send a Message</h3>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
@@ -212,7 +195,7 @@ export default function Contact() {
                     value={formData.name}
                     onChange={handleChange}
                     placeholder="John Doe"
-                    className="w-full px-4 py-3 rounded-xl bg-slate-900/90 border border-white/10 text-white placeholder-zinc-500 focus:outline-none focus:border-cyan-400 transition-colors text-sm"
+                    className="w-full px-4 py-3 rounded-xl bg-slate-900/90 border border-white/10 text-white placeholder-zinc-500 focus:outline-none focus:border-cyan-400 transition-colors text-sm min-h-[44px]"
                   />
                 </div>
 
@@ -225,7 +208,7 @@ export default function Contact() {
                     value={formData.email}
                     onChange={handleChange}
                     placeholder="john@example.com"
-                    className="w-full px-4 py-3 rounded-xl bg-slate-900/90 border border-white/10 text-white placeholder-zinc-500 focus:outline-none focus:border-cyan-400 transition-colors text-sm"
+                    className="w-full px-4 py-3 rounded-xl bg-slate-900/90 border border-white/10 text-white placeholder-zinc-500 focus:outline-none focus:border-cyan-400 transition-colors text-sm min-h-[44px]"
                   />
                 </div>
               </div>
@@ -238,7 +221,7 @@ export default function Contact() {
                   value={formData.subject}
                   onChange={handleChange}
                   placeholder="Project Discussion / Full-Time Hiring"
-                  className="w-full px-4 py-3 rounded-xl bg-slate-900/90 border border-white/10 text-white placeholder-zinc-500 focus:outline-none focus:border-cyan-400 transition-colors text-sm"
+                  className="w-full px-4 py-3 rounded-xl bg-slate-900/90 border border-white/10 text-white placeholder-zinc-500 focus:outline-none focus:border-cyan-400 transition-colors text-sm min-h-[44px]"
                 />
               </div>
 
@@ -251,14 +234,14 @@ export default function Contact() {
                   value={formData.message}
                   onChange={handleChange}
                   placeholder="Tell me about your project or role opportunities..."
-                  className="w-full px-4 py-3 rounded-xl bg-slate-900/90 border border-white/10 text-white placeholder-zinc-500 focus:outline-none focus:border-cyan-400 transition-colors text-sm resize-none"
+                  className="w-full px-4 py-3 rounded-xl bg-slate-900/90 border border-white/10 text-white placeholder-zinc-500 focus:outline-none focus:border-cyan-400 transition-colors text-sm resize-none min-h-[120px]"
                 />
               </div>
 
               <button
                 type="submit"
                 disabled={status === "submitting"}
-                className="w-full py-4 rounded-xl font-bold text-sm text-black bg-gradient-to-r from-cyan-400 via-sky-400 to-purple-500 hover:from-cyan-300 hover:to-purple-400 transition-all duration-300 flex items-center justify-center gap-2 shadow-[0_0_20px_rgba(0,242,254,0.4)] disabled:opacity-50 cursor-pointer"
+                className="w-full py-4 rounded-xl font-bold text-sm text-black bg-gradient-to-r from-cyan-400 via-sky-400 to-purple-500 hover:from-cyan-300 hover:to-purple-400 transition-all duration-300 flex items-center justify-center gap-2 shadow-[0_0_20px_rgba(0,242,254,0.4)] disabled:opacity-50 cursor-pointer min-h-[44px]"
               >
                 {status === "submitting" ? (
                   <span>Sending Message...</span>
@@ -299,7 +282,7 @@ export default function Contact() {
                 </motion.div>
               )}
             </form>
-          </motion.div>
+          </ScrollReveal>
         </div>
       </div>
     </section>

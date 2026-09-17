@@ -50,16 +50,16 @@ export default function Navbar() {
     <motion.header
       initial={{ y: -80, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.5, ease: "easeOut" }}
+      transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         scrolled
-          ? "bg-[#08090a]/80 backdrop-blur-xl border-b border-white/[0.08] shadow-[0_10px_30px_rgba(0,0,0,0.8)] py-3"
+          ? "bg-[#08090a]/85 backdrop-blur-xl border-b border-white/[0.08] shadow-[0_10px_30px_rgba(0,0,0,0.8)] py-3"
           : "bg-transparent py-5"
       }`}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12 flex items-center justify-between">
         {/* Brand Emblem */}
-        <Link href="/" className="flex items-center gap-3 group">
+        <Link href="/" className="flex items-center gap-3 group min-h-[44px]">
           <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-indigo-500 to-cyan-400 p-[1px] transition-transform duration-300 group-hover:scale-105 shadow-[0_0_15px_rgba(99,102,241,0.3)]">
             <div className="w-full h-full bg-[#08090a] rounded-[11px] flex items-center justify-center">
               <Code2 className="w-5 h-5 text-indigo-400 group-hover:rotate-12 transition-transform duration-300" />
@@ -81,7 +81,7 @@ export default function Navbar() {
             <Link
               key={link.name}
               href={link.href}
-              className="px-4 py-2 text-sm font-medium text-zinc-300 hover:text-white rounded-full hover:bg-white/[0.06] transition-all duration-200 tracking-tight"
+              className="px-4 py-2 text-sm font-medium text-zinc-300 hover:text-white rounded-full hover:bg-white/[0.06] transition-all duration-200 tracking-tight min-h-[44px] flex items-center"
             >
               {link.name}
             </Link>
@@ -94,7 +94,7 @@ export default function Navbar() {
             href="https://wa.me/8801849468455"
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-2 px-4 py-2 text-xs font-semibold text-emerald-400 bg-emerald-500/10 hover:bg-emerald-500/20 border border-emerald-500/30 rounded-full transition-all duration-200"
+            className="flex items-center gap-2 px-4 py-2 text-xs font-semibold text-emerald-400 bg-emerald-500/10 hover:bg-emerald-500/20 border border-emerald-500/30 rounded-full transition-all duration-200 min-h-[44px]"
           >
             <MessageCircle className="w-4 h-4" />
             <span>WhatsApp</span>
@@ -102,7 +102,7 @@ export default function Navbar() {
 
           <button
             onClick={triggerDownloadResume}
-            className="relative group overflow-hidden px-5 py-2.5 rounded-full font-bold text-xs tracking-wider text-black bg-gradient-to-r from-cyan-400 via-indigo-400 to-indigo-500 hover:from-cyan-300 hover:to-indigo-400 transition-all duration-300 shadow-[0_0_20px_rgba(56,189,248,0.3)] hover:shadow-[0_0_30px_rgba(99,102,241,0.5)] flex items-center gap-2 cursor-pointer"
+            className="relative group overflow-hidden px-5 py-2.5 rounded-full font-bold text-xs tracking-wider text-black bg-gradient-to-r from-cyan-400 via-indigo-400 to-indigo-500 hover:from-cyan-300 hover:to-indigo-400 transition-all duration-300 shadow-[0_0_20px_rgba(56,189,248,0.3)] hover:shadow-[0_0_30px_rgba(99,102,241,0.5)] flex items-center gap-2 cursor-pointer min-h-[44px]"
           >
             <Download className="w-4 h-4 text-black group-hover:translate-y-0.5 transition-transform duration-200" />
             <span>DOWNLOAD CV</span>
@@ -112,7 +112,7 @@ export default function Navbar() {
         {/* Mobile Hamburger Toggle Button */}
         <button
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          className="md:hidden p-2 text-zinc-300 hover:text-white rounded-xl bg-white/[0.05] border border-white/[0.08] transition-colors cursor-pointer"
+          className="md:hidden p-3 text-zinc-300 hover:text-white rounded-xl bg-white/[0.05] border border-white/[0.08] transition-colors cursor-pointer min-w-[44px] min-h-[44px] flex items-center justify-center"
           aria-label="Toggle navigation drawer"
         >
           {mobileMenuOpen ? <X className="w-6 h-6 text-cyan-400" /> : <Menu className="w-6 h-6" />}
@@ -126,16 +126,16 @@ export default function Navbar() {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.3, ease: "easeInOut" }}
+            transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
             className="md:hidden bg-[#08090a]/95 backdrop-blur-2xl border-b border-white/[0.08] px-6 py-6 space-y-4 shadow-2xl"
           >
-            <div className="flex flex-col space-y-2">
+            <div className="flex flex-col space-y-1">
               {navLinks.map((link) => (
                 <Link
                   key={link.name}
                   href={link.href}
                   onClick={() => setMobileMenuOpen(false)}
-                  className="text-base font-medium text-zinc-300 hover:text-cyan-400 py-3 border-b border-white/[0.04] transition-colors flex items-center justify-between"
+                  className="text-base font-medium text-zinc-300 hover:text-cyan-400 py-3 border-b border-white/[0.04] transition-colors flex items-center justify-between min-h-[44px]"
                 >
                   <span>{link.name}</span>
                   <ArrowUpRight className="w-4 h-4 text-zinc-500" />
@@ -149,7 +149,7 @@ export default function Navbar() {
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() => setMobileMenuOpen(false)}
-                className="w-full flex items-center justify-center gap-2 py-3 text-sm font-semibold text-emerald-400 bg-emerald-500/10 border border-emerald-500/30 rounded-xl"
+                className="w-full flex items-center justify-center gap-2 py-3 text-sm font-semibold text-emerald-400 bg-emerald-500/10 border border-emerald-500/30 rounded-xl min-h-[44px]"
               >
                 <MessageCircle className="w-4 h-4" />
                 <span>Chat on WhatsApp</span>
@@ -160,7 +160,7 @@ export default function Navbar() {
                   setMobileMenuOpen(false);
                   triggerDownloadResume();
                 }}
-                className="w-full py-3.5 text-sm font-bold text-black bg-gradient-to-r from-cyan-400 via-indigo-400 to-indigo-500 rounded-xl flex items-center justify-center gap-2 shadow-lg cursor-pointer"
+                className="w-full py-3.5 text-sm font-bold text-black bg-gradient-to-r from-cyan-400 via-indigo-400 to-indigo-500 rounded-xl flex items-center justify-center gap-2 shadow-lg cursor-pointer min-h-[44px]"
               >
                 <Download className="w-4 h-4 text-black" />
                 <span>Download CV / Resume</span>

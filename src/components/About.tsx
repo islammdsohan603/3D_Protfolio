@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { User, ShieldCheck, Terminal, Rocket, Cpu } from "lucide-react";
 import Image from "next/image";
+import { ScrollReveal, ScrollRevealStagger, ScrollRevealItem } from "./ui/ScrollReveal";
 
 interface StatCard {
   label: string;
@@ -71,21 +72,21 @@ function Interactive3DStatCard({ stat }: { stat: StatCard }) {
   };
 
   return (
-    <motion.div
+    <div
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
       style={{
         transformStyle: "preserve-3d",
         transform: `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`,
       }}
-      className="glass-card rounded-2xl p-5 border border-white/10 hover:border-cyan-400/50 transition-all duration-300 group relative overflow-hidden"
+      className="glass-card rounded-2xl p-5 border border-white/10 hover:border-cyan-400/50 transition-all duration-300 group relative overflow-hidden h-full"
     >
       <div className="flex items-center gap-3 mb-3" style={{ transform: "translateZ(20px)" }}>
         <div className={`p-2.5 rounded-xl bg-gradient-to-tr ${stat.gradient} text-black font-bold shadow-md`}>
           <Icon className="w-5 h-5 text-black" />
         </div>
         <div>
-          <span className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight font-mono">
+          <span className="text-xl sm:text-3xl font-extrabold text-white tracking-tight font-mono">
             {stat.value}
           </span>
         </div>
@@ -95,7 +96,7 @@ function Interactive3DStatCard({ stat }: { stat: StatCard }) {
         <h4 className="text-sm font-bold text-cyan-300">{stat.label}</h4>
         <p className="text-xs text-zinc-400 font-mono mt-0.5">{stat.subtext}</p>
       </div>
-    </motion.div>
+    </div>
   );
 }
 
@@ -121,16 +122,10 @@ export default function About() {
   };
 
   return (
-    <section id="about" className="relative py-24 z-10">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="about" className="relative py-16 sm:py-20 md:py-24 lg:py-32 z-10 overflow-x-clip">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12">
         {/* Section Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="text-center space-y-4 mb-16"
-        >
+        <ScrollReveal className="text-center space-y-4 mb-16">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 text-xs font-mono tracking-wider">
             <User className="w-4 h-4 text-cyan-400" />
             <span>BIOGRAPHY & BACKGROUND</span>
@@ -143,18 +138,12 @@ export default function About() {
           <p className="max-w-2xl mx-auto text-zinc-400 text-sm sm:text-base font-light">
             Dedicated Full-Stack Web Developer combining modern Next.js architecture, robust backend APIs, and futuristic 3D creative user experiences.
           </p>
-        </motion.div>
+        </ScrollReveal>
 
         {/* Main Grid Content */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
           {/* Left Column: High-Res Presentation of /sohanimage.png */}
-          <motion.div
-            initial={{ opacity: 0, x: -40 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-            className="lg:col-span-5 flex justify-center"
-          >
+          <ScrollReveal direction="right" className="lg:col-span-5 flex justify-center w-full">
             <div
               onMouseMove={handleProfileMouseMove}
               onMouseLeave={handleProfileMouseLeave}
@@ -186,60 +175,58 @@ export default function About() {
                     <ShieldCheck className="w-4 h-4 text-emerald-400" />
                     <span>Programming Hero Blackbelt</span>
                   </div>
-                  <h3 className="text-xl font-bold text-white tracking-wide">MD. SOHAN ISLAM</h3>
+                  <h3 className="text-lg sm:text-xl font-bold text-white tracking-wide">MD. SOHAN ISLAM</h3>
                   <p className="text-xs text-zinc-300 font-mono">Full-Stack Web Developer & Next.js Specialist</p>
                 </div>
               </div>
             </div>
-          </motion.div>
+          </ScrollReveal>
 
           {/* Right Column: Bio & 3D Stats Cards */}
-          <motion.div
-            initial={{ opacity: 0, x: 40 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-            className="lg:col-span-7 space-y-8"
-          >
+          <div className="lg:col-span-7 space-y-8">
             {/* Bio Narrative Card */}
-            <div className="glass-card p-6 sm:p-8 rounded-3xl border border-white/10 space-y-4">
-              <div className="flex items-center gap-2 text-xs font-mono text-cyan-400 uppercase tracking-wider">
-                <Terminal className="w-4 h-4 text-purple-400" />
-                <span>Developer Journey</span>
+            <ScrollReveal direction="left">
+              <div className="glass-card p-6 sm:p-8 rounded-3xl border border-white/10 space-y-4">
+                <div className="flex items-center gap-2 text-xs font-mono text-cyan-400 uppercase tracking-wider">
+                  <Terminal className="w-4 h-4 text-purple-400" />
+                  <span>Developer Journey</span>
+                </div>
+
+                <h3 className="text-2xl sm:text-3xl font-bold text-white leading-snug">
+                  Engineering Modern, High-Performance Web Applications
+                </h3>
+
+                <p className="text-zinc-300 text-sm sm:text-base leading-relaxed font-light">
+                  Hello! I&apos;m <strong className="text-white font-semibold">MD. SOHAN ISLAM</strong>, a passionate Full-Stack Web Developer based in Bangladesh. My passion lies in building scalable, user-focused web applications with clean Next.js App Router architecture, TypeScript, React, Node.js, Express, and MongoDB.
+                </p>
+
+                <p className="text-zinc-300 text-sm sm:text-base leading-relaxed font-light">
+                  Recognized as a <span className="text-amber-400 font-semibold">Programming Hero Blackbelt Developer</span> (Batch 13), I take pride in writing modular code, designing responsive glassmorphic interfaces, integrating payment gateways (Stripe), real-time authentication (JWT/Firebase), and building immersive 3D web experiences using Three.js and Framer Motion.
+                </p>
+
+                <div className="pt-2 flex flex-wrap items-center gap-3 text-xs font-mono text-cyan-300">
+                  <span className="px-3 py-1 rounded-lg bg-cyan-950/80 border border-cyan-500/30">
+                    ⚡ Next.js App Router
+                  </span>
+                  <span className="px-3 py-1 rounded-lg bg-purple-950/80 border border-purple-500/30">
+                    🛡️ Full-Stack Security
+                  </span>
+                  <span className="px-3 py-1 rounded-lg bg-emerald-950/80 border border-emerald-500/30">
+                    🎨 3D & Framer Motion
+                  </span>
+                </div>
               </div>
+            </ScrollReveal>
 
-              <h3 className="text-2xl sm:text-3xl font-bold text-white leading-snug">
-                Engineering Modern, High-Performance Web Applications
-              </h3>
-
-              <p className="text-zinc-300 text-sm sm:text-base leading-relaxed font-light">
-                Hello! I&apos;m <strong className="text-white font-semibold">MD. SOHAN ISLAM</strong>, a passionate Full-Stack Web Developer based in Bangladesh. My passion lies in building scalable, user-focused web applications with clean Next.js App Router architecture, TypeScript, React, Node.js, Express, and MongoDB.
-              </p>
-
-              <p className="text-zinc-300 text-sm sm:text-base leading-relaxed font-light">
-                Recognized as a <span className="text-amber-400 font-semibold">Programming Hero Blackbelt Developer</span> (Batch 13), I take pride in writing modular code, designing responsive glassmorphic interfaces, integrating payment gateways (Stripe), real-time authentication (JWT/Firebase), and building immersive 3D web experiences using Three.js and Framer Motion.
-              </p>
-
-              <div className="pt-2 flex flex-wrap items-center gap-3 text-xs font-mono text-cyan-300">
-                <span className="px-3 py-1 rounded-lg bg-cyan-950/80 border border-cyan-500/30">
-                  ⚡ Next.js App Router
-                </span>
-                <span className="px-3 py-1 rounded-lg bg-purple-950/80 border border-purple-500/30">
-                  🛡️ Full-Stack Security
-                </span>
-                <span className="px-3 py-1 rounded-lg bg-emerald-950/80 border border-emerald-500/30">
-                  🎨 3D & Framer Motion
-                </span>
-              </div>
-            </div>
-
-            {/* 3D Tilt Stats Cards Grid */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            {/* 3D Tilt Stats Cards Grid with Stagger */}
+            <ScrollRevealStagger className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               {STATS.map((stat) => (
-                <Interactive3DStatCard key={stat.label} stat={stat} />
+                <ScrollRevealItem key={stat.label}>
+                  <Interactive3DStatCard stat={stat} />
+                </ScrollRevealItem>
               ))}
-            </div>
-          </motion.div>
+            </ScrollRevealStagger>
+          </div>
         </div>
       </div>
     </section>
