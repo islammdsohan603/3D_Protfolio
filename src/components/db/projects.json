@@ -1,0 +1,96 @@
+[
+  {
+    "id": 1,
+    "title": "RecipeHub - Recipe Sharing Platform",
+    "description": "A full-stack recipe sharing platform where users can discover, create, like, and manage recipes, while administrators can monitor content, users, and platform activities through a secure dashboard.",
+    "tech": [
+      "Next.js",
+      "React",
+      "Node.js",
+      "Express.js",
+      "MongoDB",
+      "Tailwind CSS",
+      "Firebase Authentication",
+      "JWT",
+      "Stripe"
+    ],
+    "github": "https://github.com/islammdsohan603/recipe_web_site_client_code",
+    "live": "https://recipehub-roan.vercel.app/",
+    "image": "https://i.ibb.co.com/gFJv0262/recipeprojects.png",
+    "features": [
+      "Role-based authentication for Users and Admins",
+      "Create, edit, delete, and manage personal recipes",
+      "Browse, search, and filter recipes by category",
+      "Like and add recipes to Favorites",
+      "Report inappropriate recipes to administrators",
+      "Premium membership with Stripe payment integration",
+      "Responsive User Dashboard for recipe and profile management",
+      "Admin Dashboard to manage users, recipes, reports, and premium requests",
+      "Secure JWT authentication with protected routes",
+      "Mobile-friendly responsive design"
+    ]
+  },
+  {
+    "id": 2,
+    "title": "Job Portal Website",
+    "description": "A full-stack job portal platform where job seekers can search and apply for jobs, while recruiters can post and manage job listings through a secure and responsive dashboard.",
+    "tech": [
+      "Next.js",
+      "React",
+      "Node.js",
+      "Express.js",
+      "MongoDB",
+      "Tailwind CSS",
+      "JWT"
+    ],
+    "github": "https://github.com/islammdsohan603/job-portal-website",
+    "live": "https://jobswebsite-sooty.vercel.app/",
+    "image": "https://i.ibb.co/m5TF6VZQ/jobprotal.png",
+    "features": [
+      "Role-based authentication for Job Seekers and Recruiters",
+      "Create, update, and manage job postings",
+      "Advanced job search and filtering system",
+      "Apply for jobs with application tracking",
+      "Responsive dashboard for recruiters and applicants",
+      "Secure JWT authentication and protected routes"
+    ]
+  },
+  {
+    "id": 3,
+    "title": "Programming Courses Website",
+    "description": "A modern programming course platform where users can explore coding courses, view details, and access structured learning content with a clean responsive UI.",
+    "tech": ["Next.js", "React", "Tailwind CSS", "JavaScript"],
+    "github": "https://github.com/islammdsohan603/progrmming-curses-website",
+    "live": "https://programing-curors.vercel.app/",
+    "image": "https://i.ibb.co/5Xx9rFfJ/Screenshot-2026-05-25-195539.png",
+    "features": [
+      "Course listing with details",
+      "Responsive UI design",
+      "Modern landing page",
+      "Easy navigation system"
+    ]
+  },
+  {
+    "id": 4,
+    "title": "Doctor Appointment Manager",
+    "description": "A full-stack doctor appointment system where users can book appointments, manage bookings, and view doctor availability with authentication support.",
+    "tech": [
+      "Next.js",
+      "Node.js",
+      "Express.js",
+      "MongoDB",
+      "Tailwind CSS",
+      "Authentication"
+    ],
+    "github": "https://github.com/islammdsohan603/Doctor_Appointment-_Manager",
+    "live": "https://doctor-appointment-dusky-chi.vercel.app/",
+    "image": "https://i.ibb.co/Q3rJLJqK/Screenshot-2026-05-21-091523.png",
+    "features": [
+      "User authentication system",
+      "Doctor listing and details",
+      "Appointment booking system",
+      "Booking management dashboard"
+    ]
+  }
+   
+]
