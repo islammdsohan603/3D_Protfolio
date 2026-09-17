@@ -5,6 +5,8 @@ import { motion } from "framer-motion";
 import { ExternalLink, ArrowRight, Layers, CheckCircle2 } from "lucide-react";
 import { FaGithub } from "react-icons/fa6";
 import Link from "next/link";
+import Image from "next/image";
+import { formatImageUrl, FALLBACK_IMAGE_URL } from "@/lib/utils/formatImageUrl";
 
 export interface ProjectItemData {
   id: number | string;
@@ -29,6 +31,10 @@ export default function ProjectCard({ project }: ProjectCardProps) {
   const [rotateX, setRotateX] = useState(0);
   const [rotateY, setRotateY] = useState(0);
 
+  // Error boundary state for image rendering
+  const [imgSrc, setImgSrc] = useState<string>(() => formatImageUrl(project.image));
+  const [isUnoptimized, setIsUnoptimized] = useState<boolean>(false);
+
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     const card = e.currentTarget;
     const box = card.getBoundingClientRect();
@@ -49,6 +55,15 @@ export default function ProjectCard({ project }: ProjectCardProps) {
     setRotateY(0);
   };
 
+  const handleImageError = () => {
+    // If optimized image load fails, try unoptimized first, then fallback image URL
+    if (!isUnoptimized) {
+      setIsUnoptimized(true);
+    } else {
+      setImgSrc(FALLBACK_IMAGE_URL);
+    }
+  };
+
   const projectTags = project.tags || project.tech || [];
   const projectLive = project.liveUrl || project.live || "#";
   const projectGithub = project.githubUrl || project.github || "#";
@@ -67,24 +82,24 @@ export default function ProjectCard({ project }: ProjectCardProps) {
       <div className="absolute -inset-full bg-gradient-to-r from-transparent via-indigo-500/10 to-transparent group-hover:animate-pulse pointer-events-none" />
 
       <div>
-        {/* Project Thumbnail with 3D Depth Layer */}
+        {/* Robust Next.js <Image /> Container with 3D Depth Layer */}
         <div
           style={{ transform: "translateZ(30px)" }}
-          className="relative w-full h-48 sm:h-52 rounded-2xl overflow-hidden bg-[#0d1117] mb-5 border border-white/[0.08] group-hover:border-cyan-500/30 transition-all"
+          className="relative w-full h-48 md:h-56 rounded-2xl overflow-hidden bg-[#0d1117] mb-5 border border-white/[0.08] group-hover:border-cyan-500/30 transition-all"
         >
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src={project.image}
+          <Image
+            src={imgSrc}
             alt={project.title}
-            className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-700"
-            onError={(e) => {
-              (e.target as HTMLImageElement).src =
-                "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=800&q=80";
-            }}
+            fill
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            unoptimized={isUnoptimized}
+            onError={handleImageError}
+            className="object-cover object-top group-hover:scale-105 transition-transform duration-700"
+            priority={false}
           />
 
           {/* Quick Overlay with Direct Link Trigger to Case Study */}
-          <div className="absolute inset-0 bg-[#08090a]/80 backdrop-blur-xs opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center gap-3">
+          <div className="absolute inset-0 bg-[#08090a]/80 backdrop-blur-xs opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center gap-3 z-10">
             <Link
               href={`/projects/${project.id}`}
               className="px-5 py-2.5 rounded-xl text-xs font-bold text-black bg-gradient-to-r from-cyan-400 to-indigo-400 hover:from-cyan-300 hover:to-indigo-300 transition-all flex items-center gap-2 shadow-lg"

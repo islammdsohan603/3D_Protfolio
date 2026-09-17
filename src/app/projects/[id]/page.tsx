@@ -6,6 +6,7 @@ import { FaGithub } from "react-icons/fa6";
 import rawProjects from "@/components/db/projects.json";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import ProjectDetailHeroImage from "./ProjectDetailHeroImage";
 
 interface ProjectSchema {
   id: number | string;
@@ -111,15 +112,8 @@ export default async function ProjectDetailPage({
             {project.description}
           </p>
 
-          {/* High-Resolution Screenshot Banner */}
-          <div className="relative w-full h-80 sm:h-[480px] rounded-2xl overflow-hidden bg-[#0d1117] border border-white/[0.1] shadow-2xl">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src={project.image}
-              alt={project.title}
-              className="w-full h-full object-cover object-top"
-            />
-          </div>
+          {/* Robust Hero Image Component */}
+          <ProjectDetailHeroImage src={project.image} alt={project.title} />
         </div>
 
         {/* Detailed Breakdown Grid */}
