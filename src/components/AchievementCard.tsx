@@ -44,7 +44,7 @@ export default function AchievementCard({ achievement, onSelect }: AchievementCa
         transform: `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`,
       }}
       onClick={() => onSelect(achievement)}
-      className="relative glass-card rounded-3xl p-6 sm:p-7 cursor-pointer border border-white/10 hover:border-cyan-400/60 transition-all duration-300 group overflow-hidden flex flex-col justify-between h-full"
+      className="relative bg-white/90 dark:bg-zinc-900/80 rounded-3xl p-6 sm:p-7 cursor-pointer border border-slate-200/90 dark:border-white/10 hover:border-indigo-400/60 dark:hover:border-cyan-400/60 transition-all duration-300 group overflow-hidden flex flex-col justify-between h-full shadow-md dark:shadow-2xl"
     >
       {/* Dynamic Metallic Foil Shimmer */}
       <div className="absolute -inset-full bg-gradient-to-r from-transparent via-cyan-500/10 to-transparent group-hover:animate-pulse pointer-events-none" />
@@ -53,7 +53,7 @@ export default function AchievementCard({ achievement, onSelect }: AchievementCa
         {/* Image Thumbnail Container with 3D Depth */}
         <div
           style={{ transform: "translateZ(30px)" }}
-          className="relative w-full h-44 sm:h-48 rounded-2xl overflow-hidden bg-slate-900 mb-5 border border-white/10 group-hover:border-cyan-500/40 transition-all"
+          className="relative w-full h-44 sm:h-48 rounded-2xl overflow-hidden bg-slate-100 dark:bg-slate-900 mb-5 border border-slate-200 dark:border-white/10 group-hover:border-cyan-500/40 transition-all shadow-inner"
         >
           <Image
             src={achievement.image}
@@ -64,7 +64,7 @@ export default function AchievementCard({ achievement, onSelect }: AchievementCa
           />
 
           {/* Hover Overlay */}
-          <div className="absolute inset-0 bg-slate-950/60 backdrop-blur-xs opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center gap-2">
+          <div className="absolute inset-0 bg-slate-900/60 backdrop-blur-xs opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center gap-2">
             <span className="px-4 py-2 rounded-xl text-xs font-bold text-black bg-cyan-400 flex items-center gap-1.5 shadow-lg">
               <Eye className="w-4 h-4" />
               <span>Inspect Credential</span>
@@ -79,23 +79,23 @@ export default function AchievementCard({ achievement, onSelect }: AchievementCa
             <span>{achievement.badgeLabel}</span>
           </span>
 
-          <div className="w-9 h-9 rounded-full bg-slate-800/80 border border-white/10 flex items-center justify-center text-zinc-400 group-hover:text-cyan-400 group-hover:scale-110 transition-all">
+          <div className="w-9 h-9 rounded-full bg-slate-100 dark:bg-slate-800/80 border border-slate-200 dark:border-white/10 flex items-center justify-center text-slate-500 dark:text-zinc-400 group-hover:text-indigo-600 dark:group-hover:text-cyan-400 group-hover:scale-110 transition-all shadow-xs">
             <Maximize2 className="w-4 h-4" />
           </div>
         </div>
 
         {/* Card Header */}
         <div style={{ transform: "translateZ(25px)" }} className="space-y-1.5 mb-3">
-          <h3 className="text-xl sm:text-2xl font-extrabold text-white group-hover:text-cyan-300 transition-colors leading-snug">
+          <h3 className="text-xl sm:text-2xl font-extrabold text-slate-900 dark:text-white group-hover:text-indigo-600 dark:group-hover:text-cyan-300 transition-colors leading-snug">
             {achievement.title}
           </h3>
-          <p className="text-xs font-semibold text-cyan-400 font-mono">
+          <p className="text-xs font-semibold text-indigo-600 dark:text-cyan-400 font-mono">
             {achievement.organization} &bull; {achievement.batch}
           </p>
         </div>
 
         {/* Description Snippet */}
-        <p style={{ transform: "translateZ(15px)" }} className="text-zinc-300 text-sm leading-relaxed mb-5 line-clamp-3">
+        <p style={{ transform: "translateZ(15px)" }} className="text-slate-600 dark:text-zinc-300 text-sm leading-relaxed mb-5 line-clamp-3">
           {achievement.description}
         </p>
 
@@ -104,13 +104,13 @@ export default function AchievementCard({ achievement, onSelect }: AchievementCa
           {achievement.skillsCovered.slice(0, 4).map((skill) => (
             <span
               key={skill}
-              className="px-2.5 py-1 rounded-md bg-slate-900/90 text-zinc-300 text-xs border border-white/5 font-mono"
+              className="px-2.5 py-1 rounded-md bg-slate-100 dark:bg-slate-900/90 text-slate-700 dark:text-zinc-300 text-xs border border-slate-200 dark:border-white/5 font-mono"
             >
               {skill}
             </span>
           ))}
           {achievement.skillsCovered.length > 4 && (
-            <span className="px-2 py-1 rounded-md bg-cyan-950 text-cyan-400 text-xs font-mono font-bold">
+            <span className="px-2 py-1 rounded-md bg-indigo-50 dark:bg-cyan-950 text-indigo-700 dark:text-cyan-400 text-xs font-mono font-bold border border-indigo-200 dark:border-cyan-800/40">
               +{achievement.skillsCovered.length - 4} more
             </span>
           )}
@@ -118,14 +118,14 @@ export default function AchievementCard({ achievement, onSelect }: AchievementCa
       </div>
 
       {/* Footer Info */}
-      <div style={{ transform: "translateZ(15px)" }} className="flex items-center justify-between pt-4 border-t border-white/10 text-xs text-zinc-400">
+      <div style={{ transform: "translateZ(15px)" }} className="flex items-center justify-between pt-4 border-t border-slate-200 dark:border-white/10 text-xs text-slate-500 dark:text-zinc-400">
         <div className="flex items-center gap-1.5">
-          <ShieldCheck className="w-4 h-4 text-emerald-400" />
-          <span className="font-medium text-emerald-400">Verified Certificate</span>
+          <ShieldCheck className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
+          <span className="font-medium text-emerald-600 dark:text-emerald-400">Verified Certificate</span>
         </div>
 
         {achievement.validity && (
-          <div className="flex items-center gap-1 font-mono text-cyan-400/80">
+          <div className="flex items-center gap-1 font-mono text-slate-600 dark:text-cyan-400/80">
             <Calendar className="w-3.5 h-3.5" />
             <span>{achievement.validity}</span>
           </div>

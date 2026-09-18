@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import ThemeProvider from "@/components/providers/ThemeProvider";
+import SmoothScrollProvider from "@/components/providers/SmoothScrollProvider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -40,17 +42,17 @@ export const metadata: Metadata = {
   },
 };
 
-import SmoothScrollProvider from "@/components/providers/SmoothScrollProvider";
-
 export default function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${geistSans.variable} ${geistMono.variable} dark`}>
-      <body className="bg-[#09090b] text-zinc-100 min-h-screen flex flex-col antialiased selection:bg-cyan-500 selection:text-black">
-        <SmoothScrollProvider>{children}</SmoothScrollProvider>
+    <html lang="en" suppressHydrationWarning className={`${geistSans.variable} ${geistMono.variable}`}>
+      <body className="bg-slate-100 dark:bg-[#09090b] text-slate-900 dark:text-zinc-100 min-h-screen flex flex-col antialiased selection:bg-cyan-500 selection:text-black transition-colors duration-300">
+        <ThemeProvider>
+          <SmoothScrollProvider>{children}</SmoothScrollProvider>
+        </ThemeProvider>
       </body>
     </html>
   );

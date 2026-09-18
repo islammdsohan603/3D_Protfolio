@@ -2,7 +2,7 @@
 
 import React, { useState, useRef } from "react";
 import { motion, useMotionValue, useTransform, useSpring } from "framer-motion";
-import { ShieldCheck, Cpu, Sparkles, Activity, Layers } from "lucide-react";
+import { Cpu, Layers, Activity } from "lucide-react";
 import { TechItem } from "./techData";
 
 interface TechBentoCardProps {
@@ -62,26 +62,21 @@ export default function TechBentoCard({ item, index }: TechBentoCardProps) {
   const getBadgeStyle = (tag: string) => {
     switch (tag) {
       case "Core Engine":
-        return "bg-cyan-500/10 text-cyan-400 border-cyan-500/30";
+        return "bg-cyan-500/10 text-cyan-600 dark:text-cyan-400 border-cyan-500/30";
       case "Production Ready":
-        return "bg-emerald-500/10 text-emerald-400 border-emerald-500/30";
+        return "bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border-emerald-500/30";
       case "Enterprise Standard":
-        return "bg-purple-500/10 text-purple-400 border-purple-500/30";
+        return "bg-purple-500/10 text-purple-600 dark:text-purple-400 border-purple-500/30";
       case "Actively Leveling Up":
-      case "Realtime Pipeline":
-        return "bg-amber-500/10 text-amber-400 border-amber-500/30 animate-pulse";
+        return "bg-amber-500/10 text-amber-600 dark:text-amber-400 border-amber-500/30";
       default:
-        return "bg-zinc-800/80 text-zinc-300 border-zinc-700/60";
+        return "bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 border-indigo-500/30";
     }
   };
 
   return (
-    <motion.div
+    <div
       ref={cardRef}
-      initial={{ opacity: 0, y: 25 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-40px" }}
-      transition={{ duration: 0.5, delay: index * 0.04 }}
       style={{
         perspective: 1000,
       }}
@@ -96,7 +91,7 @@ export default function TechBentoCard({ item, index }: TechBentoCardProps) {
           rotateY,
           transformStyle: "preserve-3d",
         }}
-        className="relative h-full w-full rounded-3xl bg-zinc-900/60 backdrop-blur-xl border border-zinc-800/80 p-6 transition-colors duration-300 group-hover:border-zinc-700/90 overflow-hidden flex flex-col justify-between shadow-xl"
+        className="relative h-full w-full rounded-3xl bg-white/90 dark:bg-zinc-900/80 backdrop-blur-xl border border-slate-200/90 dark:border-zinc-800/80 p-6 transition-colors duration-300 group-hover:border-indigo-400/80 dark:group-hover:border-zinc-700/90 overflow-hidden flex flex-col justify-between shadow-md dark:shadow-xl"
       >
         {/* Dynamic Brand Torch Spotlight Gradient Effect */}
         <motion.div
@@ -105,7 +100,7 @@ export default function TechBentoCard({ item, index }: TechBentoCardProps) {
             background: useTransform(
               [spotlightX, spotlightY],
               ([x, y]) =>
-                `radial-gradient(450px circle at ${x}px ${y}px, ${item.brandColor}18, transparent 75%)`
+                `radial-gradient(450px circle at ${x}px ${y}px, ${item.brandColor}20, transparent 75%)`
             ),
           }}
         />
@@ -123,26 +118,26 @@ export default function TechBentoCard({ item, index }: TechBentoCardProps) {
           <div className="flex items-center gap-3">
             {/* Vector Brand Logo Container with Dynamic Hex Glow */}
             <div
-              className="relative w-12 h-12 rounded-2xl flex items-center justify-center border border-white/10 bg-slate-950/80 transition-all duration-300 group-hover:scale-110"
+              className="relative w-12 h-12 rounded-2xl flex items-center justify-center border border-slate-200 dark:border-white/10 bg-slate-100 dark:bg-slate-950/80 transition-all duration-300 group-hover:scale-110"
               style={{
                 boxShadow: isHovered
                   ? `0 0 25px ${item.brandColor}45, inset 0 0 10px ${item.brandColor}20`
                   : "none",
-                borderColor: isHovered ? `${item.brandColor}60` : "rgba(255,255,255,0.1)",
+                borderColor: isHovered ? `${item.brandColor}60` : undefined,
               }}
             >
               <IconComponent
-                className="w-6 h-6 transition-colors duration-300"
-                style={{ color: isHovered ? item.brandColor : "#E4E4E7" }}
+                className="w-6 h-6 transition-colors duration-300 text-slate-700 dark:text-[#E4E4E7]"
+                style={{ color: isHovered ? item.brandColor : undefined }}
               />
             </div>
 
             <div>
-              <h3 className="font-bold text-white text-lg tracking-tight flex items-center gap-2">
+              <h3 className="font-bold text-slate-900 dark:text-white text-lg tracking-tight flex items-center gap-2">
                 <span>{item.name}</span>
               </h3>
-              <div className="text-xs text-zinc-400 font-mono flex items-center gap-1.5 mt-0.5">
-                <Layers className="w-3 h-3 text-zinc-500" />
+              <div className="text-xs text-slate-500 dark:text-zinc-400 font-mono flex items-center gap-1.5 mt-0.5">
+                <Layers className="w-3 h-3 text-slate-400 dark:text-zinc-500" />
                 <span>{item.proficiencyTier}</span>
               </div>
             </div>
@@ -161,16 +156,16 @@ export default function TechBentoCard({ item, index }: TechBentoCardProps) {
 
         {/* Middle Body: Typical Real-World Architecture Use-Case */}
         <div className="relative z-10 my-2" style={{ transform: "translateZ(15px)" }}>
-          <p className="text-zinc-400 text-xs sm:text-sm leading-relaxed font-normal">
+          <p className="text-slate-600 dark:text-zinc-400 text-xs sm:text-sm leading-relaxed font-normal">
             {item.typicalUseCase}
           </p>
         </div>
 
         {/* Bottom Telemetry Bar: Proficiency Meter & Cyber Specs */}
-        <div className="relative z-10 pt-4 mt-2 border-t border-white/5 flex flex-col gap-2" style={{ transform: "translateZ(20px)" }}>
+        <div className="relative z-10 pt-4 mt-2 border-t border-slate-200/80 dark:border-white/5 flex flex-col gap-2" style={{ transform: "translateZ(20px)" }}>
           <div className="flex items-center justify-between text-xs font-mono">
-            <span className="text-zinc-400 flex items-center gap-1">
-              <Cpu className="w-3.5 h-3.5 text-cyan-400" />
+            <span className="text-slate-500 dark:text-zinc-400 flex items-center gap-1">
+              <Cpu className="w-3.5 h-3.5 text-cyan-600 dark:text-cyan-400" />
               <span>EFFICIENCY TIER</span>
             </span>
             <span
@@ -182,7 +177,7 @@ export default function TechBentoCard({ item, index }: TechBentoCardProps) {
           </div>
 
           {/* Animated Sci-Fi Progress Meter */}
-          <div className="w-full h-1.5 rounded-full bg-zinc-950 overflow-hidden border border-white/5 relative">
+          <div className="w-full h-1.5 rounded-full bg-slate-200 dark:bg-zinc-950 overflow-hidden border border-slate-300 dark:border-white/5 relative">
             <motion.div
               initial={{ width: 0 }}
               whileInView={{ width: `${item.proficiency}%` }}
@@ -203,6 +198,6 @@ export default function TechBentoCard({ item, index }: TechBentoCardProps) {
           style={{ backgroundColor: item.brandColor }}
         />
       </motion.div>
-    </motion.div>
+    </div>
   );
 }

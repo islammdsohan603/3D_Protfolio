@@ -1,4 +1,3 @@
-import { ElementType } from "react";
 import {
   SiReact,
   SiNextdotjs,
@@ -24,7 +23,6 @@ import {
   SiFramer,
   SiPostman,
 } from "react-icons/si";
-import { Cpu, Terminal, Radio } from "lucide-react";
 
 export type TechCategoryType = "all" | "frontend" | "backend" | "devops" | "frontier";
 

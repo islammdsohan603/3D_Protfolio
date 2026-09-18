@@ -1,44 +1,33 @@
 "use client";
 
-import React, { useEffect } from "react";
-import Lenis from "lenis";
+import React from "react";
+import { ReactLenis } from "lenis/react";
 
 interface SmoothScrollProviderProps {
   children: React.ReactNode;
 }
 
 /**
- * Sheryians-Style Smooth Inertia Scroll Provider powered by Lenis
- * Implements fluid velocity-based easing and momentum across Next.js App Router.
+ * Global Buttery Smooth Scroll Engine powered by Lenis
+ * Delivers natural inertia curve, frictionless momentum, and seamless
+ * coexistence with Framer Motion scroll triggers and sticky-pinned interactive decks.
  */
 export default function SmoothScrollProvider({ children }: SmoothScrollProviderProps) {
-  useEffect(() => {
-    // Initialize Lenis with cinematic inertia curve
-    const lenis = new Lenis({
-      duration: 1.2,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-      orientation: "vertical",
-      gestureOrientation: "vertical",
-      smoothWheel: true,
-      wheelMultiplier: 1.0,
-      touchMultiplier: 1.5,
-      autoRaf: false,
-    });
-
-    let rafId: number;
-    function raf(time: number) {
-      lenis.raf(time);
-      rafId = requestAnimationFrame(raf);
-    }
-
-    rafId = requestAnimationFrame(raf);
-
-    // Clean up on unmount
-    return () => {
-      cancelAnimationFrame(rafId);
-      lenis.destroy();
-    };
-  }, []);
-
-  return <>{children}</>;
+  return (
+    <ReactLenis
+      root
+      options={{
+        duration: 1.2,
+        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+        orientation: "vertical",
+        gestureOrientation: "vertical",
+        smoothWheel: true,
+        wheelMultiplier: 1.0,
+        touchMultiplier: 1.5,
+        infinite: false,
+      }}
+    >
+      {children}
+    </ReactLenis>
+  );
 }

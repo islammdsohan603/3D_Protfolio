@@ -59,26 +59,26 @@ export default function Achievements() {
   const [selectedAchievement, setSelectedAchievement] = useState<AchievementItem | null>(null);
 
   return (
-    <section id="achievements" className="relative py-16 sm:py-20 md:py-24 lg:py-32 z-10 overflow-x-clip">
-      <div className="w-11/12 max-w-7xl mx-auto">
+    <section id="achievements" className="relative py-5 md:py-10 lg:py-16 z-10 overflow-x-clip transition-colors duration-300">
+      <div className="w-11/12 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <ScrollReveal className="text-center space-y-4 mb-16">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-400 text-xs font-mono tracking-wider">
-            <Trophy className="w-4 h-4 text-amber-400" />
+        <ScrollReveal className="text-center space-y-4 mb-12 sm:mb-16">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-600 dark:text-amber-400 text-xs font-mono tracking-wider shadow-xs dark:shadow-sm">
+            <Trophy className="w-4 h-4 text-amber-600 dark:text-amber-400" />
             <span>HONORS & CERTIFIED CREDENTIALS</span>
           </div>
 
-          <h2 className="text-3xl sm:text-5xl font-extrabold text-white tracking-tight">
+          <h2 className="text-3xl sm:text-5xl font-extrabold text-slate-900 dark:text-white tracking-tight">
             Achievements & <span className="text-gradient-cyan">Certifications</span>
           </h2>
 
-          <p className="max-w-2xl mx-auto text-zinc-400 text-sm sm:text-base font-light">
+          <p className="max-w-2xl mx-auto text-slate-600 dark:text-zinc-400 text-sm sm:text-base font-light">
             Official industry certifications, awards, and verified credentials establishing technical mastery in modern full-stack engineering and Next.js development.
           </p>
         </ScrollReveal>
 
         {/* Cards Grid */}
-        <ScrollRevealStagger className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <ScrollRevealStagger className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
           {ACHIEVEMENTS_DATA.map((item) => (
             <ScrollRevealItem key={item.id} className="h-full">
               <AchievementCard

@@ -50,7 +50,7 @@ export default function Projects() {
     <section
       id="projects"
       ref={containerRef}
-      className="relative min-h-[400vh] bg-[#09090b]"
+      className="relative min-h-[400vh] bg-slate-100 dark:bg-[#09090b] transition-colors duration-300"
       aria-label="Selected Works & Case Studies"
     >
       {/* Pinned Viewport Track: Sticks firmly for the full 400vh scroll duration */}
@@ -58,20 +58,20 @@ export default function Projects() {
         {/* Stage wrapper with smooth exit dampening */}
         <motion.div
           style={{ y: stageY, opacity: stageOpacity }}
-          className="w-11/12 max-w-7xl mx-auto flex flex-col h-full justify-between"
+          className="w-11/12 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col h-full justify-between"
         >
-          {/* Section Header: Obsidian Typography with Selected Works Kicker */}
+          {/* Section Header: Slate/Obsidian Typography with Selected Works Kicker */}
           <div className="text-center space-y-2.5 sm:space-y-3 mb-2 sm:mb-4 shrink-0">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-zinc-900 border border-zinc-800 text-zinc-400 text-xs font-mono tracking-wider shadow-sm">
-              <FolderGit2 className="w-3.5 h-3.5 text-indigo-400" />
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/90 dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 text-slate-600 dark:text-zinc-400 text-xs font-mono tracking-wider shadow-xs dark:shadow-sm">
+              <FolderGit2 className="w-3.5 h-3.5 text-indigo-600 dark:text-indigo-400" />
               <span>SELECTED WORKS // PRODUCTION CASE STUDIES</span>
             </div>
 
-            <h2 className="text-2xl sm:text-4xl lg:text-5xl font-extrabold text-zinc-100 tracking-tight">
-              Featured Engineering & <span className="text-indigo-400">Scaled Architecture</span>
+            <h2 className="text-2xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900 dark:text-zinc-100 tracking-tight">
+              Featured Engineering & <span className="text-indigo-600 dark:text-indigo-400">Scaled Architecture</span>
             </h2>
 
-            <p className="max-w-2xl mx-auto text-zinc-400 text-xs sm:text-sm font-light leading-relaxed hidden sm:block">
+            <p className="max-w-2xl mx-auto text-slate-600 dark:text-zinc-400 text-xs sm:text-sm font-light leading-relaxed hidden sm:block">
               Progressive pinned case studies demonstrating scalable Next.js App Router architecture, microservices, and interactive 3D web systems.
             </p>
           </div>
@@ -90,21 +90,21 @@ export default function Projects() {
           </div>
 
           {/* Bottom Telemetry Guide Indicator with Interactive Progress Line */}
-          <div className="flex items-center justify-between text-[11px] font-mono text-zinc-500 pt-2 border-t border-zinc-900 shrink-0">
+          <div className="flex items-center justify-between text-[11px] font-mono text-slate-500 dark:text-zinc-500 pt-2 border-t border-slate-300 dark:border-zinc-900 shrink-0">
             <span className="flex items-center gap-2">
-              <span className="w-1.5 h-1.5 rounded-full bg-indigo-400 animate-pulse" />
+              <span className="w-1.5 h-1.5 rounded-full bg-indigo-600 dark:bg-indigo-400 animate-pulse" />
               <span>SCROLL TO ADVANCE CASE STUDIES</span>
             </span>
 
             {/* Micro Progress Bar */}
-            <div className="w-24 sm:w-36 h-1 bg-zinc-900 rounded-full overflow-hidden hidden sm:block border border-zinc-800">
+            <div className="w-24 sm:w-36 h-1 bg-slate-200 dark:bg-zinc-900 rounded-full overflow-hidden hidden sm:block border border-slate-300 dark:border-zinc-800">
               <motion.div
                 style={{ width: progressWidth }}
                 className="h-full bg-gradient-to-r from-indigo-500 via-sky-400 to-indigo-400 rounded-full"
               />
             </div>
 
-            <span className="text-indigo-400">
+            <span className="text-indigo-600 dark:text-indigo-400">
               {String(projects.length).padStart(2, "0")} ARCHITECTURAL SYSTEMS
             </span>
           </div>
