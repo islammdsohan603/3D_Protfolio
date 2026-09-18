@@ -78,13 +78,13 @@ export default function SkillsSection() {
   }, []);
 
   return (
-    <section id="skills" className="relative py-5 md:py-10 lg:py-16 z-10 overflow-x-clip transition-colors duration-300">
+    <section id="skills" className="relative pt-6 sm:pt-10 md:pt-12 pb-8 sm:pb-12 md:pb-16 z-10 overflow-x-clip transition-colors duration-300">
       {/* Sci-Fi Background Glow & Ambient Elements */}
       <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[800px] h-[500px] bg-gradient-to-tr from-cyan-500/10 via-purple-500/5 to-emerald-500/5 blur-[140px] pointer-events-none rounded-full" />
 
       <div className="w-11/12 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Section Telemetry Header */}
-        <ScrollReveal className="text-center space-y-4 mb-12 sm:mb-16">
+        <ScrollReveal className="text-center space-y-3.5 mb-8 sm:mb-10">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-600 dark:text-cyan-400 text-xs font-mono tracking-wider shadow-[0_0_15px_rgba(0,242,254,0.15)]">
             <Cpu className="w-4 h-4 text-cyan-600 dark:text-cyan-400" />
             <span>INTERACTIVE TECH BENTO & ORBITAL HUD</span>
@@ -99,16 +99,16 @@ export default function SkillsSection() {
           </p>
 
           {/* Telemetry Stats Bar */}
-          <div className="pt-4 flex flex-wrap items-center justify-center gap-4 text-xs font-mono">
-            <div className="px-4 py-2 rounded-xl bg-white/90 dark:bg-zinc-900/80 border border-slate-200/90 dark:border-zinc-800 text-slate-700 dark:text-zinc-300 flex items-center gap-2 shadow-xs dark:shadow-sm">
+          <div className="pt-3 flex flex-wrap items-center justify-center gap-3 sm:gap-4 text-xs font-mono">
+            <div className="px-3.5 py-1.5 rounded-xl bg-white/90 dark:bg-zinc-900/80 border border-slate-200/90 dark:border-zinc-800 text-slate-700 dark:text-zinc-300 flex items-center gap-2 shadow-xs dark:shadow-sm">
               <span className="w-2 h-2 rounded-full bg-cyan-500 dark:bg-cyan-400 animate-pulse" />
               <span>TOTAL STACKS: <strong className="text-cyan-600 dark:text-cyan-400">{stats.total}</strong></span>
             </div>
-            <div className="px-4 py-2 rounded-xl bg-white/90 dark:bg-zinc-900/80 border border-slate-200/90 dark:border-zinc-800 text-slate-700 dark:text-zinc-300 flex items-center gap-2 shadow-xs dark:shadow-sm">
+            <div className="px-3.5 py-1.5 rounded-xl bg-white/90 dark:bg-zinc-900/80 border border-slate-200/90 dark:border-zinc-800 text-slate-700 dark:text-zinc-300 flex items-center gap-2 shadow-xs dark:shadow-sm">
               <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500 dark:text-emerald-400" />
               <span>PRODUCTION HARDENED: <strong className="text-emerald-600 dark:text-emerald-400">{stats.production}</strong></span>
             </div>
-            <div className="px-4 py-2 rounded-xl bg-white/90 dark:bg-zinc-900/80 border border-slate-200/90 dark:border-zinc-800 text-slate-700 dark:text-zinc-300 flex items-center gap-2 shadow-xs dark:shadow-sm">
+            <div className="px-3.5 py-1.5 rounded-xl bg-white/90 dark:bg-zinc-900/80 border border-slate-200/90 dark:border-zinc-800 text-slate-700 dark:text-zinc-300 flex items-center gap-2 shadow-xs dark:shadow-sm">
               <Zap className="w-3.5 h-3.5 text-purple-600 dark:text-purple-400" />
               <span>90%+ MASTERY: <strong className="text-purple-600 dark:text-purple-400">{stats.mastered}</strong></span>
             </div>
@@ -116,7 +116,7 @@ export default function SkillsSection() {
         </ScrollReveal>
 
         {/* 3D Central Orbital Node Matrix Showcase */}
-        <ScrollReveal direction="up" delay={0.1} className="mb-12 sm:mb-16 rounded-3xl bg-white/90 dark:bg-slate-950/60 border border-slate-200/90 dark:border-zinc-800/90 backdrop-blur-2xl p-4 sm:p-6 shadow-xl dark:shadow-2xl relative overflow-hidden transition-colors duration-300">
+        <ScrollReveal direction="up" delay={0.1} className="mb-8 sm:mb-10 rounded-3xl bg-white/90 dark:bg-slate-950/60 border border-slate-200/90 dark:border-zinc-800/90 backdrop-blur-2xl p-4 sm:p-6 shadow-xl dark:shadow-2xl relative overflow-hidden transition-colors duration-300">
           <div className="flex items-center justify-between px-4 py-2 mb-2 border-b border-slate-200/60 dark:border-white/5 text-xs font-mono text-slate-500 dark:text-zinc-400">
             <div className="flex items-center gap-2">
               <Sparkles className="w-4 h-4 text-cyan-600 dark:text-cyan-400" />
@@ -129,7 +129,7 @@ export default function SkillsSection() {
         </ScrollReveal>
 
         {/* Perspective Category Filter Switcher Tabs */}
-        <ScrollReveal direction="up" delay={0.15} className="flex justify-center mb-10 sm:mb-12">
+        <ScrollReveal direction="up" delay={0.15} className="flex justify-center mb-8 sm:mb-10">
           <div className="inline-flex flex-wrap items-center justify-center gap-2 bg-white/90 dark:bg-zinc-950/90 p-2 rounded-2xl border border-slate-200/90 dark:border-zinc-800 backdrop-blur-xl shadow-md dark:shadow-xl transition-colors duration-300">
             {CATEGORY_FILTERS.map((tab) => {
               const isActive = activeCategory === tab.id;
@@ -181,7 +181,7 @@ export default function SkillsSection() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.4 }}
-            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-12 sm:mb-16"
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8 sm:mb-10"
           >
             {filteredItems.map((item, idx) => (
               <TechBentoCard key={item.id} item={item} index={idx} />
@@ -191,7 +191,7 @@ export default function SkillsSection() {
 
         {/* Dedicated Highlight Pod for Active Frontier Radar */}
         {(activeCategory === "all" || activeCategory === "frontier") && (
-          <ScrollReveal direction="up" delay={0.2} className="mt-12 sm:mt-16">
+          <ScrollReveal direction="up" delay={0.2} className="mt-8 sm:mt-10">
             <FrontierRadarPod />
           </ScrollReveal>
         )}

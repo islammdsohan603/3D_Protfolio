@@ -141,12 +141,12 @@ export default function About() {
   return (
     <section
       id="about"
-      className="relative py-5 md:py-10 lg:py-16 z-10 overflow-x-clip transition-colors duration-300"
+      className="relative pt-8 sm:pt-12 md:pt-16 pb-8 sm:pb-12 z-10 overflow-x-clip transition-colors duration-300"
       aria-label="About MD. SOHAN - Academic & Professional Background"
     >
       <div className="w-11/12 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <ScrollReveal className="text-center space-y-3.5 mb-12 sm:mb-16">
+        <ScrollReveal className="text-center space-y-3.5 mb-8 sm:mb-10">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/90 dark:bg-zinc-900/80 border border-slate-200 dark:border-zinc-800 text-slate-600 dark:text-zinc-400 text-xs font-mono tracking-wider shadow-xs dark:shadow-sm">
             <User className="w-4 h-4 text-indigo-600 dark:text-indigo-400" />
             <span>BIOGRAPHY & ACADEMIC BACKGROUND</span>
