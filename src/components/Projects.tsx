@@ -54,14 +54,14 @@ export default function Projects() {
       aria-label="Selected Works & Case Studies"
     >
       {/* Pinned Viewport Track: Sticks firmly for the full 400vh scroll duration */}
-      <div className="sticky top-0 h-screen w-full flex flex-col justify-between pt-16 sm:pt-20 lg:pt-24 pb-4 sm:pb-6 overflow-hidden">
+      <div className="sticky top-0 h-screen w-full flex flex-col justify-between pt-24 sm:pt-28 pb-10 overflow-hidden">
         {/* Stage wrapper with smooth exit dampening */}
         <motion.div
           style={{ y: stageY, opacity: stageOpacity }}
-          className="w-11/12 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col h-full justify-between"
+          className="w-11/12 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col h-full justify-between min-h-0"
         >
-          {/* Section Header: Slate/Obsidian Typography with Selected Works Kicker */}
-          <div className="text-center space-y-2.5 sm:space-y-3 mb-2 sm:mb-4 shrink-0">
+          {/* Section Header: Clear margin separation to guarantee zero overlap */}
+          <div className="text-center space-y-2 sm:space-y-2.5 mb-6 sm:mb-8 shrink-0">
             <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/90 dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 text-slate-600 dark:text-zinc-400 text-xs font-mono tracking-wider shadow-xs dark:shadow-sm">
               <FolderGit2 className="w-3.5 h-3.5 text-indigo-600 dark:text-indigo-400" />
               <span>SELECTED WORKS // PRODUCTION CASE STUDIES</span>
@@ -76,8 +76,8 @@ export default function Projects() {
             </p>
           </div>
 
-          {/* Stacking Card Deck Canvas: All cards anchor in this stage */}
-          <div className="relative w-full flex-1 flex items-center justify-center my-auto min-h-[460px] sm:min-h-[520px] lg:min-h-[540px]">
+          {/* Stacking Card Deck Canvas: Dedicated flex-1 container with bounds protection */}
+          <div className="relative w-full flex-1 flex items-center justify-center min-h-0 overflow-hidden">
             {projects.map((project, index) => (
               <ProjectCard
                 key={project.id}
@@ -90,7 +90,7 @@ export default function Projects() {
           </div>
 
           {/* Bottom Telemetry Guide Indicator with Interactive Progress Line */}
-          <div className="flex items-center justify-between text-[11px] font-mono text-slate-500 dark:text-zinc-500 pt-2 border-t border-slate-300 dark:border-zinc-900 shrink-0">
+          <div className="flex items-center justify-between text-[11px] font-mono text-slate-500 dark:text-zinc-500 pt-3 border-t border-slate-300 dark:border-zinc-900 shrink-0">
             <span className="flex items-center gap-2">
               <span className="w-1.5 h-1.5 rounded-full bg-indigo-600 dark:bg-indigo-400 animate-pulse" />
               <span>SCROLL TO ADVANCE CASE STUDIES</span>
