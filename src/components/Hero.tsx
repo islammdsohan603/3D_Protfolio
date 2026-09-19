@@ -178,7 +178,7 @@ export default function Hero() {
                 <div className="text-[10px] sm:text-xs text-slate-500 dark:text-zinc-400 uppercase tracking-wider">Blackbelt Rank</div>
               </div>
               <div>
-                <div className="text-xl sm:text-3xl font-extrabold font-mono text-emerald-600 dark:text-emerald-400">20+</div>
+                <div className="text-xl sm:text-3xl font-extrabold font-mono text-emerald-600 dark:text-emerald-400">10+</div>
                 <div className="text-[10px] sm:text-xs text-slate-500 dark:text-zinc-400 uppercase tracking-wider">Live Projects</div>
               </div>
             </div>
