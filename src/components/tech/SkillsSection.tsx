@@ -19,7 +19,7 @@ import TechBentoCard from "./TechBentoCard";
 import FrontierRadarPod from "./FrontierRadarPod";
 import { ScrollReveal } from "../ui/ScrollReveal";
 
-// Dynamic import for Three.js 3D Orbital Canvas to avoid SSR issues
+// ── 3D assets (SSR-safe dynamic imports) ─────────────────────────────────────
 const OrbitalSphere3D = dynamic(() => import("./OrbitalSphere3D"), {
   ssr: false,
   loading: () => (
@@ -32,6 +32,13 @@ const OrbitalSphere3D = dynamic(() => import("./OrbitalSphere3D"), {
   ),
 });
 
+// Ambient particle background (imported from shared canvas/)
+const AmbientParticles3D = dynamic(
+  () => import("../canvas/AmbientParticles3D"),
+  { ssr: false, loading: () => null }
+);
+
+// ─────────────────────────────────────────────────────────────────────────────
 const CATEGORY_FILTERS: CategoryFilter[] = [
   { id: "all", label: "All Ecosystems", iconName: "Layers", count: TECH_ITEMS.length },
   {
@@ -72,18 +79,29 @@ export default function SkillsSection() {
     return {
       total: TECH_ITEMS.length,
       mastered: TECH_ITEMS.filter((i) => i.proficiency >= 90).length,
-      production: TECH_ITEMS.filter((i) => i.statusTag === "Production Ready" || i.statusTag === "Core Engine").length,
+      production: TECH_ITEMS.filter(
+        (i) => i.statusTag === "Production Ready" || i.statusTag === "Core Engine"
+      ).length,
       frontier: TECH_ITEMS.filter((i) => i.category === "frontier").length,
     };
   }, []);
 
   return (
-    <section id="skills" className="relative pt-6 sm:pt-10 md:pt-12 pb-8 sm:pb-12 md:pb-16 z-10 overflow-x-clip transition-colors duration-300">
-      {/* Sci-Fi Background Glow & Ambient Elements */}
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[800px] h-[500px] bg-gradient-to-tr from-cyan-500/10 via-purple-500/5 to-emerald-500/5 blur-[140px] pointer-events-none rounded-full" />
+    <section
+      id="skills"
+      className="relative pt-6 sm:pt-10 md:pt-12 pb-8 sm:pb-12 md:pb-16 z-10 overflow-x-clip transition-colors duration-300"
+    >
+      {/* ── Ambient 3D Particle Background ───────────────────────────────── */}
+      <div className="absolute inset-0 -z-10 pointer-events-none overflow-hidden">
+        <AmbientParticles3D variant="cyan-violet" />
+        {/* Vignette overlay */}
+        <div className="absolute inset-0 bg-gradient-to-b from-slate-100/65 via-slate-100/15 to-slate-100/70 dark:from-zinc-950/65 dark:via-zinc-950/15 dark:to-zinc-950/75 pointer-events-none" />
+        {/* Retained sci-fi glow accent */}
+        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[800px] h-[500px] bg-gradient-to-tr from-cyan-500/10 via-purple-500/5 to-emerald-500/5 blur-[140px] pointer-events-none rounded-full" />
+      </div>
 
       <div className="w-11/12 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        {/* Section Telemetry Header */}
+        {/* Section header */}
         <ScrollReveal className="text-center space-y-3.5 mb-8 sm:mb-10">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-600 dark:text-cyan-400 text-xs font-mono tracking-wider shadow-[0_0_15px_rgba(0,242,254,0.15)]">
             <Cpu className="w-4 h-4 text-cyan-600 dark:text-cyan-400" />
@@ -95,40 +113,58 @@ export default function SkillsSection() {
           </h2>
 
           <p className="max-w-3xl mx-auto text-slate-600 dark:text-zinc-400 text-sm sm:text-base leading-relaxed">
-            Production-grade stack architecture, backend engines, cloud infrastructure, and active continuous learning radar.
+            Production-grade stack architecture, backend engines, cloud infrastructure, and active
+            continuous learning radar.
           </p>
 
-          {/* Telemetry Stats Bar */}
+          {/* Telemetry stats bar */}
           <div className="pt-3 flex flex-wrap items-center justify-center gap-3 sm:gap-4 text-xs font-mono">
             <div className="px-3.5 py-1.5 rounded-xl bg-white/90 dark:bg-zinc-900/80 border border-slate-200/90 dark:border-zinc-800 text-slate-700 dark:text-zinc-300 flex items-center gap-2 shadow-xs dark:shadow-sm">
               <span className="w-2 h-2 rounded-full bg-cyan-500 dark:bg-cyan-400 animate-pulse" />
-              <span>TOTAL STACKS: <strong className="text-cyan-600 dark:text-cyan-400">{stats.total}</strong></span>
+              <span>
+                TOTAL STACKS:{" "}
+                <strong className="text-cyan-600 dark:text-cyan-400">{stats.total}</strong>
+              </span>
             </div>
             <div className="px-3.5 py-1.5 rounded-xl bg-white/90 dark:bg-zinc-900/80 border border-slate-200/90 dark:border-zinc-800 text-slate-700 dark:text-zinc-300 flex items-center gap-2 shadow-xs dark:shadow-sm">
               <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500 dark:text-emerald-400" />
-              <span>PRODUCTION HARDENED: <strong className="text-emerald-600 dark:text-emerald-400">{stats.production}</strong></span>
+              <span>
+                PRODUCTION HARDENED:{" "}
+                <strong className="text-emerald-600 dark:text-emerald-400">{stats.production}</strong>
+              </span>
             </div>
             <div className="px-3.5 py-1.5 rounded-xl bg-white/90 dark:bg-zinc-900/80 border border-slate-200/90 dark:border-zinc-800 text-slate-700 dark:text-zinc-300 flex items-center gap-2 shadow-xs dark:shadow-sm">
               <Zap className="w-3.5 h-3.5 text-purple-600 dark:text-purple-400" />
-              <span>90%+ MASTERY: <strong className="text-purple-600 dark:text-purple-400">{stats.mastered}</strong></span>
+              <span>
+                90%+ MASTERY:{" "}
+                <strong className="text-purple-600 dark:text-purple-400">{stats.mastered}</strong>
+              </span>
             </div>
           </div>
         </ScrollReveal>
 
-        {/* 3D Central Orbital Node Matrix Showcase */}
-        <ScrollReveal direction="up" delay={0.1} className="mb-8 sm:mb-10 rounded-3xl bg-white/90 dark:bg-slate-950/60 border border-slate-200/90 dark:border-zinc-800/90 backdrop-blur-2xl p-4 sm:p-6 shadow-xl dark:shadow-2xl relative overflow-hidden transition-colors duration-300">
+        {/* 3D Central Orbital Node Matrix */}
+        <ScrollReveal
+          direction="up"
+          delay={0.1}
+          className="mb-8 sm:mb-10 rounded-3xl bg-white/90 dark:bg-slate-950/60 border border-slate-200/90 dark:border-zinc-800/90 backdrop-blur-2xl p-4 sm:p-6 shadow-xl dark:shadow-2xl relative overflow-hidden transition-colors duration-300"
+        >
           <div className="flex items-center justify-between px-4 py-2 mb-2 border-b border-slate-200/60 dark:border-white/5 text-xs font-mono text-slate-500 dark:text-zinc-400">
             <div className="flex items-center gap-2">
               <Sparkles className="w-4 h-4 text-cyan-600 dark:text-cyan-400" />
-              <span className="text-slate-800 dark:text-zinc-200 font-semibold">3D ANTIGRAVITY SPHERE MATRIX</span>
+              <span className="text-slate-800 dark:text-zinc-200 font-semibold">
+                3D ANTIGRAVITY SPHERE MATRIX
+              </span>
             </div>
-            <span className="hidden sm:inline-block text-slate-500 dark:text-zinc-500">INTERACTIVE ORBITAL CONTROLS ENABLED</span>
+            <span className="hidden sm:inline-block text-slate-500 dark:text-zinc-500">
+              INTERACTIVE ORBITAL CONTROLS ENABLED
+            </span>
           </div>
 
           <OrbitalSphere3D />
         </ScrollReveal>
 
-        {/* Perspective Category Filter Switcher Tabs */}
+        {/* Category filter tabs */}
         <ScrollReveal direction="up" delay={0.15} className="flex justify-center mb-8 sm:mb-10">
           <div className="inline-flex flex-wrap items-center justify-center gap-2 bg-white/90 dark:bg-zinc-950/90 p-2 rounded-2xl border border-slate-200/90 dark:border-zinc-800 backdrop-blur-xl shadow-md dark:shadow-xl transition-colors duration-300">
             {CATEGORY_FILTERS.map((tab) => {
@@ -151,11 +187,11 @@ export default function SkillsSection() {
                     />
                   )}
                   <span className="relative z-10 font-mono flex items-center gap-2">
-                    {tab.id === "all" && <Layers className="w-4 h-4" />}
-                    {tab.id === "frontend" && <Code2 className="w-4 h-4" />}
-                    {tab.id === "backend" && <Server className="w-4 h-4" />}
-                    {tab.id === "devops" && <Cloud className="w-4 h-4" />}
-                    {tab.id === "frontier" && <Radio className="w-4 h-4" />}
+                    {tab.id === "all"      && <Layers className="w-4 h-4" />}
+                    {tab.id === "frontend" && <Code2  className="w-4 h-4" />}
+                    {tab.id === "backend"  && <Server className="w-4 h-4" />}
+                    {tab.id === "devops"   && <Cloud  className="w-4 h-4" />}
+                    {tab.id === "frontier" && <Radio  className="w-4 h-4" />}
                     <span>{tab.label}</span>
                     <span
                       className={`ml-1 px-2 py-0.5 rounded-full text-[10px] font-bold ${
@@ -173,7 +209,7 @@ export default function SkillsSection() {
           </div>
         </ScrollReveal>
 
-        {/* Bento Grid Layout Container */}
+        {/* Bento grid */}
         <AnimatePresence mode="wait">
           <motion.div
             key={activeCategory}
@@ -189,7 +225,7 @@ export default function SkillsSection() {
           </motion.div>
         </AnimatePresence>
 
-        {/* Dedicated Highlight Pod for Active Frontier Radar */}
+        {/* Frontier Radar pod */}
         {(activeCategory === "all" || activeCategory === "frontier") && (
           <ScrollReveal direction="up" delay={0.2} className="mt-8 sm:mt-10">
             <FrontierRadarPod />

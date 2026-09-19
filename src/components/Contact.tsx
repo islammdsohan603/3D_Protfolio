@@ -1,11 +1,18 @@
 "use client";
 
 import React, { useState } from "react";
+import dynamic from "next/dynamic";
 import { motion } from "framer-motion";
 import { Mail, Phone, MapPin, Send, MessageCircle, CheckCircle2, AlertCircle } from "lucide-react";
 import { FaGithub, FaLinkedin, FaWhatsapp } from "react-icons/fa6";
 import confetti from "canvas-confetti";
 import { ScrollReveal } from "./ui/ScrollReveal";
+
+// Contextual 3D radar grid background (SSR-safe)
+const RadarGrid3D = dynamic(
+  () => import("./canvas/RadarGrid3D"),
+  { ssr: false, loading: () => null }
+);
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -77,6 +84,14 @@ export default function Contact() {
 
   return (
     <section id="contact" className="relative py-5 md:py-10 lg:py-16 z-10 overflow-x-clip transition-colors duration-300">
+      {/* ── 3D Communication Radar Background ─────────────────────── */}
+      <div className="absolute inset-0 -z-10 pointer-events-none overflow-hidden">
+        <RadarGrid3D />
+        {/* Emerald-tinted vignette overlay */}
+        <div className="absolute inset-0 bg-gradient-to-b from-slate-100/70 via-slate-100/22 to-slate-100/75 dark:from-zinc-950/70 dark:via-zinc-950/20 dark:to-zinc-950/80 pointer-events-none" />
+        {/* Subtle emerald glow at grid center */}
+        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[600px] h-64 bg-gradient-to-t from-emerald-500/7 via-transparent to-transparent blur-3xl rounded-full pointer-events-none" />
+      </div>
       <div className="w-11/12 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <ScrollReveal className="text-center space-y-4 mb-12 sm:mb-16">

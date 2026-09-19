@@ -1,10 +1,17 @@
 "use client";
 
 import React, { useState } from "react";
+import dynamic from "next/dynamic";
 import { Trophy } from "lucide-react";
 import AchievementCard from "./AchievementCard";
 import AchievementModal, { AchievementItem } from "./AchievementModal";
 import { ScrollReveal, ScrollRevealStagger, ScrollRevealItem } from "./ui/ScrollReveal";
+
+// ── Contextual 3D trophy particle vortex (SSR-safe) ───────────────────────────
+const TrophyAura3D = dynamic(
+  () => import("./canvas/TrophyAura3D"),
+  { ssr: false, loading: () => null }
+);
 
 const ACHIEVEMENTS_DATA: AchievementItem[] = [
   {
@@ -59,9 +66,21 @@ export default function Achievements() {
   const [selectedAchievement, setSelectedAchievement] = useState<AchievementItem | null>(null);
 
   return (
-    <section id="achievements" className="relative py-5 md:py-10 lg:py-16 z-10 overflow-x-clip transition-colors duration-300">
+    <section
+      id="achievements"
+      className="relative py-5 md:py-10 lg:py-16 z-10 overflow-x-clip transition-colors duration-300"
+    >
+      {/* ── 3D Trophy Particle Vortex Background ─────────────────────────── */}
+      <div className="absolute inset-0 -z-10 pointer-events-none overflow-hidden">
+        <TrophyAura3D />
+        {/* Golden vignette overlay — warms the section tone */}
+        <div className="absolute inset-0 bg-gradient-to-b from-slate-100/72 via-slate-100/20 to-slate-100/78 dark:from-zinc-950/72 dark:via-zinc-950/18 dark:to-zinc-950/82 pointer-events-none" />
+        {/* Subtle gold ambient glow at center */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[400px] bg-gradient-to-tr from-amber-500/8 via-yellow-400/5 to-transparent blur-[120px] rounded-full pointer-events-none" />
+      </div>
+
       <div className="w-11/12 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section Header */}
+        {/* Section header */}
         <ScrollReveal className="text-center space-y-4 mb-12 sm:mb-16">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-600 dark:text-amber-400 text-xs font-mono tracking-wider shadow-xs dark:shadow-sm">
             <Trophy className="w-4 h-4 text-amber-600 dark:text-amber-400" />
@@ -69,15 +88,17 @@ export default function Achievements() {
           </div>
 
           <h2 className="text-3xl sm:text-5xl font-extrabold text-slate-900 dark:text-white tracking-tight">
-            Achievements & <span className="text-gradient-cyan">Certifications</span>
+            Achievements &{" "}
+            <span className="text-gradient-cyan">Certifications</span>
           </h2>
 
           <p className="max-w-2xl mx-auto text-slate-600 dark:text-zinc-400 text-sm sm:text-base font-light">
-            Official industry certifications, awards, and verified credentials establishing technical mastery in modern full-stack engineering and Next.js development.
+            Official industry certifications, awards, and verified credentials establishing technical
+            mastery in modern full-stack engineering and Next.js development.
           </p>
         </ScrollReveal>
 
-        {/* Cards Grid */}
+        {/* Cards grid */}
         <ScrollRevealStagger className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
           {ACHIEVEMENTS_DATA.map((item) => (
             <ScrollRevealItem key={item.id} className="h-full">
@@ -90,7 +111,7 @@ export default function Achievements() {
         </ScrollRevealStagger>
       </div>
 
-      {/* Lightbox Modal with Full-Screen Image Preview */}
+      {/* Lightbox modal */}
       <AchievementModal
         achievement={selectedAchievement}
         onClose={() => setSelectedAchievement(null)}

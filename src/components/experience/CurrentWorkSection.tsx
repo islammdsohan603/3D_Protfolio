@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import dynamic from "next/dynamic";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   Building2,
@@ -27,12 +28,26 @@ import {
 } from "react-icons/si";
 import { ScrollReveal } from "../ui/ScrollReveal";
 
+// Contextual 3D server cluster background (SSR-safe dynamic import)
+const ServerCluster3D = dynamic(
+  () => import("../canvas/ServerCluster3D"),
+  { ssr: false, loading: () => null }
+);
+
+
 export default function CurrentWorkSection() {
   const [activeHudTab, setActiveHudTab] = useState<"terminal" | "architecture" | "telemetry">("terminal");
 
   return (
     <section id="experience" className="relative py-5 md:py-10 lg:py-16 z-10 overflow-x-clip transition-colors duration-300">
-      {/* Sci-Fi Ambient Glow Backdrop */}
+      {/* ── Contextual 3D Server Cluster Background ─────────────────── */}
+      <div className="absolute inset-0 -z-10 pointer-events-none overflow-hidden">
+        <ServerCluster3D />
+        {/* Section vignette */}
+        <div className="absolute inset-0 bg-gradient-to-b from-slate-100/68 via-slate-100/18 to-slate-100/72 dark:from-zinc-950/68 dark:via-zinc-950/18 dark:to-zinc-950/78 pointer-events-none" />
+      </div>
+
+      {/* Retained CSS Sci-Fi Glow Backdrop (complements particle layer) */}
       <div className="absolute top-1/3 left-1/4 w-[600px] h-[400px] bg-gradient-to-br from-cyan-500/10 via-indigo-500/10 to-purple-500/5 blur-[140px] pointer-events-none rounded-full" />
       <div className="absolute bottom-10 right-10 w-96 h-96 bg-emerald-500/5 rounded-full blur-3xl pointer-events-none" />
 
