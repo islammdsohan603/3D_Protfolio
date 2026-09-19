@@ -11,6 +11,7 @@ import Projects from "@/components/Projects";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 import FloatingWhatsApp from "@/components/FloatingWhatsApp";
+import ScrollIndicator from "@/components/ScrollIndicator";
 
 export default function Home() {
   return (
@@ -47,6 +48,9 @@ export default function Home() {
 
       {/* Floating Corner WhatsApp Action */}
       <FloatingWhatsApp />
+
+      {/* Persistent Right-Side Scroll & Back-to-Top Indicator */}
+      <ScrollIndicator />
     </main>
   );
 }
