@@ -5,20 +5,8 @@ import { motion, AnimatePresence } from "framer-motion";
 import { X, Award, ShieldCheck, Calendar, CheckCircle2, Maximize2 } from "lucide-react";
 import Image from "next/image";
 
-export interface AchievementItem {
-  id: string;
-  title: string;
-  subtitle: string;
-  organization: string;
-  batch: string;
-  credentialId?: string;
-  validity?: string;
-  badgeLabel: string;
-  description: string;
-  skillsCovered: string[];
-  gradient: string;
-  image: string; // Mapping to local public image asset (/blackbelt.png or /cartificat.png)
-}
+import { AchievementItem } from "./Achievements";
+export type { AchievementItem };
 
 interface AchievementModalProps {
   achievement: AchievementItem | null;

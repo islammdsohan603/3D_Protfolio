@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useRef } from "react";
+import { useRouter } from "next/navigation";
 import { motion, useMotionValue, useSpring, useTransform, type MotionValue } from "framer-motion";
 import { ExternalLink, ArrowRight, Layers, Eye, Sparkles } from "lucide-react";
 import { FaGithub } from "react-icons/fa6";
@@ -55,6 +56,7 @@ export default function ProjectCard({
   total,
   containerProgress,
 }: ProjectCardProps) {
+  const router = useRouter();
   const cardRef = useRef<HTMLDivElement>(null);
   const [imgSrc, setImgSrc] = useState<string>(() => formatImageUrl(project.image));
   const [isUnoptimized, setIsUnoptimized] = useState<boolean>(false);
@@ -183,34 +185,79 @@ export default function ProjectCard({
     return `blur(${blur}px) brightness(${brightness})`;
   });
 
-  // 5. Dynamic Z-Index shifting
-  const zIndex = useTransform(containerProgress, (progress) => {
+  // =========================================================================
+  // STRICT ACTIVE CARD HIT-TESTING & POINTER-EVENTS ISOLATION
+  // Only the card actively in view receives hit-tests and pointer events.
+  // Inactive or pre-entering cards are strictly pointer-events: none and sit at low z-index.
+  // =========================================================================
+  const isActiveCard = (progress: number): boolean => {
     if (isFirst) {
-      return progress >= endExit ? 1 : 20;
+      return progress < cardStep - 0.02;
     }
     if (isLast) {
-      return progress >= startEnter ? 50 : 0;
+      return progress >= (total - 1) * cardStep - 0.02;
     }
-    if (progress < startEnter) return 0;
-    if (progress >= endExit) return index + 1;
-    return 20 + index * 10;
+    const myStart = index * cardStep - 0.02;
+    const myEnd = (index + 1) * cardStep - 0.02;
+    return progress >= myStart && progress < myEnd;
+  };
+
+  // 5. Dynamic Z-Index shifting: Active card is always elevated to 50
+  const zIndex = useTransform(containerProgress, (progress) => {
+    if (isActiveCard(progress)) {
+      return 50;
+    }
+    if (progress >= (index + 1) * cardStep) {
+      return index + 1;
+    }
+    return 10 + index;
   });
 
-  // 6. Interactive pointer events gating
+  // 6. Interactive pointer events gating: Only active card allows pointer events
   const pointerEvents = useTransform(containerProgress, (progress) => {
-    if (isFirst) {
-      return progress < endExit ? "auto" : "none";
-    }
-    if (isLast) {
-      return progress >= startEnter ? "auto" : "none";
-    }
-    return progress >= startEnter && progress < endExit ? "auto" : "none";
+    return isActiveCard(progress) ? "auto" : "none";
   });
 
   const projectTags = project.tags || project.tech || [];
-  const projectLive = project.liveUrl || project.live || "#";
-  const projectGithub = project.githubUrl || project.github || "#";
+
+  // Strict URL Normalization
+  const rawLiveUrl = project.liveUrl || project.live;
+  const formattedLiveUrl =
+    rawLiveUrl && rawLiveUrl.trim() !== "" && rawLiveUrl !== "#"
+      ? rawLiveUrl.trim().startsWith("http")
+        ? rawLiveUrl.trim()
+        : `https://${rawLiveUrl.trim()}`
+      : null;
+
+  const rawGithubUrl = project.githubUrl || project.github;
+  const formattedGithubUrl =
+    rawGithubUrl && rawGithubUrl.trim() !== "" && rawGithubUrl !== "#"
+      ? rawGithubUrl.trim().startsWith("http")
+        ? rawGithubUrl.trim()
+        : `https://${rawGithubUrl.trim()}`
+      : null;
+
   const architectureBadge = getArchitectureBadge(project);
+
+  // Card Navigation Isolation: Only navigates if the click is outside interactive action buttons
+  const handleCardClick = (e: React.MouseEvent<HTMLDivElement>) => {
+    const target = e.target as HTMLElement | null;
+    if (target?.closest("a, button, [role='button']:not([data-card-trigger='true'])")) {
+      return;
+    }
+    router.push(`/projects/${project.id}`);
+  };
+
+  const handleCardKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
+    if (e.key === "Enter" || e.key === " ") {
+      const target = e.target as HTMLElement | null;
+      if (target?.closest("a, button")) {
+        return;
+      }
+      e.preventDefault();
+      router.push(`/projects/${project.id}`);
+    }
+  };
 
   return (
     <motion.div
@@ -221,11 +268,20 @@ export default function ProjectCard({
         opacity,
         filter,
         zIndex,
-        pointerEvents,
       }}
-      className="absolute inset-0 w-full h-full flex items-center justify-center will-change-transform"
+      className="absolute inset-0 w-full h-full flex items-center justify-center will-change-transform pointer-events-none"
     >
-      <div className="relative w-full max-h-[calc(100vh-16rem)] sm:max-h-[calc(100vh-15rem)] rounded-3xl bg-white/95 dark:bg-zinc-950/90 backdrop-blur-2xl border border-slate-200/90 dark:border-zinc-800/90 shadow-xl dark:shadow-[0_25px_60px_-15px_rgba(0,0,0,0.95)] overflow-hidden transition-colors duration-300 flex flex-col justify-center">
+      <motion.div
+        role="button"
+        tabIndex={0}
+        data-card-trigger="true"
+        onClick={handleCardClick}
+        onKeyDown={handleCardKeyDown}
+        onPointerMove={handlePointerMove}
+        onPointerLeave={handlePointerLeave}
+        style={{ pointerEvents }}
+        className="relative w-full max-h-[calc(100vh-16rem)] sm:max-h-[calc(100vh-15rem)] rounded-3xl bg-white/95 dark:bg-zinc-950/90 backdrop-blur-2xl border border-slate-200/90 dark:border-zinc-800/90 hover:border-zinc-400 dark:hover:border-zinc-700/90 shadow-xl dark:shadow-[0_25px_60px_-15px_rgba(0,0,0,0.95)] overflow-hidden transition-all duration-300 flex flex-col justify-center cursor-pointer group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500"
+      >
         {/* Subtle Ambient Top Rim Highlight */}
         <div className="absolute top-0 left-10 right-10 h-[1px] bg-gradient-to-r from-transparent via-slate-300 dark:via-zinc-700/60 to-transparent pointer-events-none z-10" />
 
@@ -254,12 +310,17 @@ export default function ProjectCard({
                   </span>
                 </div>
 
-                {projectGithub !== "#" && (
+                {formattedGithubUrl && (
                   <a
-                    href={projectGithub}
+                    href={formattedGithubUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-slate-100 dark:bg-zinc-900/80 border border-slate-200 dark:border-zinc-800 text-slate-700 dark:text-zinc-400 hover:text-slate-900 dark:hover:text-zinc-100 text-xs font-mono transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 shadow-xs"
+                    onPointerDown={(e) => e.stopPropagation()}
+                    onMouseDown={(e) => e.stopPropagation()}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                    }}
+                    className="relative z-50 pointer-events-auto flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-slate-100 dark:bg-zinc-900/80 border border-slate-200 dark:border-zinc-800 text-slate-700 dark:text-zinc-400 hover:text-slate-900 dark:hover:text-zinc-100 text-xs font-mono transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 shadow-xs cursor-pointer"
                     aria-label={`View ${project.title} source code on GitHub`}
                   >
                     <FaGithub className="w-3.5 h-3.5" />
@@ -317,18 +378,28 @@ export default function ProjectCard({
               <div className="pt-1 flex flex-wrap items-center gap-3">
                 <Link
                   href={`/projects/${project.id}`}
-                  className="border border-slate-300 dark:border-zinc-700 bg-white dark:bg-zinc-900 hover:bg-slate-50 dark:hover:bg-zinc-800 text-slate-800 dark:text-zinc-100 text-xs font-medium px-4 py-2 rounded-xl shadow-xs dark:shadow-sm transition-all duration-300 flex items-center gap-2 min-h-[38px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500"
+                  onPointerDown={(e) => e.stopPropagation()}
+                  onMouseDown={(e) => e.stopPropagation()}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                  }}
+                  className="relative z-50 pointer-events-auto border border-slate-300 dark:border-zinc-700 bg-white dark:bg-zinc-900 hover:bg-slate-50 dark:hover:bg-zinc-800 text-slate-800 dark:text-zinc-100 text-xs font-medium px-4 py-2 rounded-xl shadow-xs dark:shadow-sm transition-all duration-300 flex items-center gap-2 min-h-[38px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 cursor-pointer"
                 >
                   <span>Case Study</span>
                   <ArrowRight className="w-3.5 h-3.5 text-slate-500 dark:text-zinc-400" />
                 </Link>
 
-                {projectLive !== "#" && (
+                {formattedLiveUrl && (
                   <a
-                    href={projectLive}
+                    href={formattedLiveUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="bg-indigo-600 hover:bg-indigo-500 text-white font-medium text-xs px-4 py-2 rounded-xl transition-colors duration-200 flex items-center gap-2 shadow-xs min-h-[38px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400"
+                    onPointerDown={(e) => e.stopPropagation()}
+                    onMouseDown={(e) => e.stopPropagation()}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                    }}
+                    className="relative z-50 pointer-events-auto bg-indigo-600 hover:bg-indigo-500 text-white font-medium text-xs px-4 py-2 rounded-xl transition-colors duration-200 flex items-center gap-2 shadow-sm min-h-[38px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400 cursor-pointer"
                     aria-label={`Open live preview for ${project.title}`}
                   >
                     <ExternalLink className="w-3.5 h-3.5" />
@@ -338,15 +409,11 @@ export default function ProjectCard({
               </div>
             </div>
 
-            {/* Right Column: 3D Mockup Frame (col-span-6) */}
-            <div
-              onPointerMove={handlePointerMove}
-              onPointerLeave={handlePointerLeave}
-              className="lg:col-span-6 w-full flex justify-center perspective-[1000px]"
-            >
+            {/* Right Column: 3D Mockup Frame (col-span-6) — non-blocking pointer events */}
+            <div className="lg:col-span-6 w-full flex justify-center perspective-[1000px] pointer-events-none select-none">
               <motion.div
                 style={{ rotateX, rotateY, transformStyle: "preserve-3d" }}
-                className="relative w-full h-44 sm:h-52 md:h-60 lg:h-[280px] xl:h-[320px] rounded-2xl overflow-hidden border border-slate-200 dark:border-zinc-800 bg-slate-100 dark:bg-zinc-900/50 shadow-lg dark:shadow-2xl group/preview transition-transform duration-300"
+                className="relative w-full h-44 sm:h-52 md:h-60 lg:h-[280px] xl:h-[320px] rounded-2xl overflow-hidden border border-slate-200 dark:border-zinc-800 bg-slate-100 dark:bg-zinc-900/50 shadow-lg dark:shadow-2xl group/preview transition-transform duration-300 pointer-events-none"
               >
                 <Image
                   src={imgSrc}
@@ -355,7 +422,7 @@ export default function ProjectCard({
                   sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 650px"
                   unoptimized={isUnoptimized}
                   onError={handleImageError}
-                  className="object-cover object-top group-hover/preview:scale-105 transition-transform duration-700 ease-out"
+                  className="object-cover object-top group-hover/preview:scale-105 transition-transform duration-700 ease-out pointer-events-none"
                   priority={index === 0}
                 />
 
@@ -363,20 +430,17 @@ export default function ProjectCard({
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-900/40 dark:from-zinc-950/70 via-transparent to-transparent pointer-events-none" />
 
                 {/* Interactive Case Study Trigger Overlay */}
-                <div className="absolute inset-0 bg-slate-900/50 dark:bg-zinc-950/60 backdrop-blur-xs opacity-0 group-hover/preview:opacity-100 transition-opacity duration-300 flex items-center justify-center gap-3">
-                  <Link
-                    href={`/projects/${project.id}`}
-                    className="px-4 py-2 rounded-xl bg-white/95 dark:bg-zinc-900/90 border border-slate-200 dark:border-zinc-700 text-xs font-medium text-slate-900 dark:text-zinc-100 flex items-center gap-2 shadow-lg hover:bg-slate-100 dark:hover:bg-zinc-800 transition-colors"
-                  >
+                <div className="absolute inset-0 bg-slate-900/50 dark:bg-zinc-950/60 backdrop-blur-xs opacity-0 group-hover/preview:opacity-100 transition-opacity duration-300 flex items-center justify-center gap-3 pointer-events-none">
+                  <div className="px-4 py-2 rounded-xl bg-white/95 dark:bg-zinc-900/90 border border-slate-200 dark:border-zinc-700 text-xs font-medium text-slate-900 dark:text-zinc-100 flex items-center gap-2 shadow-lg pointer-events-none">
                     <Eye className="w-3.5 h-3.5 text-slate-700 dark:text-zinc-300" />
                     <span>Explore Case Study</span>
-                  </Link>
+                  </div>
                 </div>
               </motion.div>
             </div>
           </div>
         </div>
-      </div>
+      </motion.div>
     </motion.div>
   );
 }

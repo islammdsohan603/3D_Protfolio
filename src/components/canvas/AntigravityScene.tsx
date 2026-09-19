@@ -41,10 +41,10 @@ export const TECH_NODES: TechNodeConfig[] = [
     glowColor: "#38bdf8",
     icon: SiTypescript,
     desktopPos: [-3.8, 2.3, -0.6],
-    mobilePos: [-1.6, 2.7, -0.6],
+    mobilePos: [-1.4, 3.5, -0.8],
     speed: 1.2,
     rotationSpeed: 1.0,
-    floatRange: [0.25, 0.3],
+    floatRange: [0.2, 0.25],
     phase: 0.0,
     scale: 0.95,
   },
@@ -56,10 +56,10 @@ export const TECH_NODES: TechNodeConfig[] = [
     glowColor: "#facc15",
     icon: SiJavascript,
     desktopPos: [-4.6, -0.2, 0.6],
-    mobilePos: [-1.8, 0.4, 0.4],
+    mobilePos: [-1.5, -3.2, 0.4],
     speed: 1.4,
     rotationSpeed: 0.9,
-    floatRange: [0.2, 0.25],
+    floatRange: [0.15, 0.2],
     phase: 1.4,
     scale: 0.9,
   },
@@ -71,10 +71,10 @@ export const TECH_NODES: TechNodeConfig[] = [
     glowColor: "#38bdf8",
     icon: SiNextdotjs,
     desktopPos: [-0.2, 3.1, -1.2],
-    mobilePos: [0.0, 3.4, -1.0],
+    mobilePos: [0.0, 4.0, -1.0],
     speed: 1.1,
     rotationSpeed: 0.8,
-    floatRange: [0.2, 0.35],
+    floatRange: [0.18, 0.25],
     phase: 2.8,
     scale: 1.05,
   },
@@ -86,10 +86,10 @@ export const TECH_NODES: TechNodeConfig[] = [
     glowColor: "#00f2fe",
     icon: SiReact,
     desktopPos: [3.6, 2.5, 0.4],
-    mobilePos: [1.7, 2.7, 0.3],
+    mobilePos: [1.4, 3.4, 0.3],
     speed: 1.3,
     rotationSpeed: 1.1,
-    floatRange: [0.22, 0.28],
+    floatRange: [0.18, 0.24],
     phase: 4.2,
     scale: 1.0,
   },
@@ -101,10 +101,10 @@ export const TECH_NODES: TechNodeConfig[] = [
     glowColor: "#4ade80",
     icon: SiNodedotjs,
     desktopPos: [-3.4, -2.5, -0.8],
-    mobilePos: [-1.6, -2.7, -0.8],
+    mobilePos: [-1.3, -3.8, -0.8],
     speed: 1.5,
     rotationSpeed: 1.2,
-    floatRange: [0.2, 0.3],
+    floatRange: [0.18, 0.24],
     phase: 5.6,
     scale: 0.95,
   },
@@ -116,10 +116,10 @@ export const TECH_NODES: TechNodeConfig[] = [
     glowColor: "#94a3b8",
     icon: SiExpress,
     desktopPos: [4.3, -1.5, 0.2],
-    mobilePos: [1.8, 0.2, 0.1],
+    mobilePos: [1.5, -3.3, 0.1],
     speed: 1.2,
     rotationSpeed: 0.85,
-    floatRange: [0.18, 0.24],
+    floatRange: [0.15, 0.2],
     phase: 7.0,
     scale: 0.9,
   },
@@ -131,10 +131,10 @@ export const TECH_NODES: TechNodeConfig[] = [
     glowColor: "#22c55e",
     icon: SiMongodb,
     desktopPos: [1.0, -3.1, -1.4],
-    mobilePos: [1.5, -2.8, -1.2],
+    mobilePos: [0.0, -4.2, -1.2],
     speed: 1.0,
     rotationSpeed: 0.75,
-    floatRange: [0.25, 0.35],
+    floatRange: [0.2, 0.25],
     phase: 8.4,
     scale: 1.0,
   },
@@ -232,7 +232,7 @@ function TechConstellationNode({
   });
 
   return (
-    <group ref={groupRef} position={targetBase} scale={isMobile ? node.scale * 0.85 : node.scale}>
+    <group ref={groupRef} position={targetBase} scale={isMobile ? node.scale * 0.65 : node.scale}>
       <Float speed={node.speed * 0.8} rotationIntensity={0.6} floatIntensity={0.8}>
         {/* 3D Translucent Dark Glass Core Sphere */}
         <mesh>
@@ -276,7 +276,7 @@ function TechConstellationNode({
         {/* Crisp 3D Transformed Glassmorphism Tech Badge with Glowing Neon Accents */}
         <Html
           transform
-          distanceFactor={7.2}
+          distanceFactor={isMobile ? 9.6 : 7.2}
           position={[0, 0, 0]}
           center
           pointerEvents="none"
@@ -447,7 +447,7 @@ export default function AntigravityScene() {
   };
 
   return (
-    <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden select-none">
+    <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden select-none opacity-50 sm:opacity-90 dark:opacity-75 dark:sm:opacity-100 transition-opacity">
       <Canvas
         gl={{
           antialias: true,

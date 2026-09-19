@@ -84,7 +84,7 @@ export default function Hero() {
   return (
     <section
       id="hero"
-      className="relative min-h-screen flex items-center justify-center pt-24 sm:pt-28 pb-5 md:pb-10 lg:pb-16 py-5 md:py-10 lg:py-16 overflow-x-clip transition-colors duration-300"
+      className="relative min-h-screen flex items-center justify-center pt-28 sm:pt-32 md:pt-36 lg:pt-40 pb-12 overflow-x-clip transition-colors duration-300"
     >
       {/* 3D Antigravity Canvas Background */}
       <AntigravityCanvasWrapper />
@@ -107,7 +107,7 @@ export default function Hero() {
               <h2 className="text-lg sm:text-xl md:text-2xl font-mono text-slate-500 dark:text-zinc-400 font-light">
                 Hello, World! 👋 I&apos;m
               </h2>
-              <h1 className="text-4xl sm:text-6xl md:text-7xl font-extrabold tracking-tight text-slate-900 dark:text-zinc-100 leading-tight sm:leading-none">
+              <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight text-slate-900 dark:text-zinc-100 leading-tight sm:leading-none">
                 MD. SOHAN
               </h1>
             </div>
@@ -116,10 +116,10 @@ export default function Hero() {
           {/* Typing Role Animation */}
           <ScrollRevealItem>
             <div className="h-12 flex items-center justify-center lg:justify-start">
-              <div className="flex items-center gap-2 text-lg sm:text-2xl lg:text-3xl font-bold font-mono text-indigo-600 dark:text-indigo-400">
-                <Terminal className="w-6 h-6 sm:w-7 sm:h-7 text-indigo-600 dark:text-indigo-400" />
+              <div className="flex items-center gap-2 text-sm sm:text-lg md:text-xl font-bold font-mono text-indigo-600 dark:text-indigo-400">
+                <Terminal className="w-4 h-4 sm:w-5 sm:h-5 text-indigo-600 dark:text-indigo-400 shrink-0" />
                 <span>{displayText}</span>
-                <span className="w-1 h-7 bg-indigo-600 dark:bg-indigo-400 animate-pulse" />
+                <span className="w-1 h-5 sm:h-6 bg-indigo-600 dark:bg-indigo-400 animate-pulse inline-block" />
               </div>
             </div>
           </ScrollRevealItem>

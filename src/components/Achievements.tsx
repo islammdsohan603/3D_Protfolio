@@ -1,10 +1,9 @@
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
 import dynamic from "next/dynamic";
 import { Trophy } from "lucide-react";
 import AchievementCard from "./AchievementCard";
-import AchievementModal, { AchievementItem } from "./AchievementModal";
 import { ScrollReveal, ScrollRevealStagger, ScrollRevealItem } from "./ui/ScrollReveal";
 
 // ── Contextual 3D trophy particle vortex (SSR-safe) ───────────────────────────
@@ -13,17 +12,36 @@ const TrophyAura3D = dynamic(
   { ssr: false, loading: () => null }
 );
 
-const ACHIEVEMENTS_DATA: AchievementItem[] = [
+export interface AchievementItem {
+  id: string;
+  title: string;
+  subtitle: string;
+  organization: string;
+  batch: string;
+  credentialId?: string;
+  issueDate?: string;
+  validity?: string;
+  badgeLabel: string;
+  description: string;
+  skillsCovered: string[];
+  gradient: string;
+  image: string;
+  verificationUrl?: string;
+}
+
+export const ACHIEVEMENTS_DATA: AchievementItem[] = [
   {
-    id: "blackbelt-dev",
+    id: "blackbelt",
     title: "Programming Hero BLACKBELT Developer",
     subtitle: "Recognized for Outstanding Performance & Technical Mastery",
     organization: "Programming Hero",
     batch: "Batch 13",
+    issueDate: "October 2024",
     validity: "Valid Till Oct 2026",
     badgeLabel: "Blackbelt Developer",
     gradient: "bg-gradient-to-r from-amber-400 via-orange-400 to-yellow-300",
     image: "/blackbelt.png",
+    verificationUrl: "https://web.programming-hero.com",
     description:
       "Awarded the prestigious BLACKBELT title by Programming Hero for achieving top-tier scores, exceptional code quality, rapid problem solving, and building complex end-to-end full-stack applications in Batch 13.",
     skillsCovered: [
@@ -38,15 +56,17 @@ const ACHIEVEMENTS_DATA: AchievementItem[] = [
     ],
   },
   {
-    id: "completion-excellence",
+    id: "certificate",
     title: "Certificate of Completion with Excellence",
-    subtitle: "Complete Web Development Course",
+    subtitle: "Complete Web Development Course (Batch 13, WEB13-0641)",
     organization: "Programming Hero",
     batch: "Batch 13",
     credentialId: "WEB13-0641",
+    issueDate: "September 2024",
     badgeLabel: "Top Graduate / Excellence",
     gradient: "bg-gradient-to-r from-cyan-400 via-sky-400 to-purple-400",
     image: "/cartificat.png",
+    verificationUrl: "https://web.programming-hero.com",
     description:
       "Completed full intensive curriculum with distinction (Credential ID: WEB13-0641). Mastering HTML5, CSS3, JavaScript (ES6+), React.js, Next.js, Node.js, Express.js, MongoDB database modeling, security authentication, and production deployment.",
     skillsCovered: [
@@ -63,8 +83,6 @@ const ACHIEVEMENTS_DATA: AchievementItem[] = [
 ];
 
 export default function Achievements() {
-  const [selectedAchievement, setSelectedAchievement] = useState<AchievementItem | null>(null);
-
   return (
     <section
       id="achievements"
@@ -102,20 +120,11 @@ export default function Achievements() {
         <ScrollRevealStagger className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
           {ACHIEVEMENTS_DATA.map((item) => (
             <ScrollRevealItem key={item.id} className="h-full">
-              <AchievementCard
-                achievement={item}
-                onSelect={(selected) => setSelectedAchievement(selected)}
-              />
+              <AchievementCard achievement={item} />
             </ScrollRevealItem>
           ))}
         </ScrollRevealStagger>
       </div>
-
-      {/* Lightbox modal */}
-      <AchievementModal
-        achievement={selectedAchievement}
-        onClose={() => setSelectedAchievement(null)}
-      />
     </section>
   );
 }
