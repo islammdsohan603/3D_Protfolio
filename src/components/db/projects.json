@@ -1,6 +1,84 @@
 [
   {
-    "id": 1,
+  "id": 1,
+  "title": "Flixora - AI Movie Recommendation & Streaming Platform",
+  "description": "A state-of-the-art hybrid entertainment platform that unifies Subscription Video on Demand (SVOD) streaming with physical cinema hall ticket reservations, delivering a seamless experience for digital streaming and real-world movie experiences.",
+  "architecture": "Built with a hybrid full-stack architecture using Next.js, React, Express.js, MongoDB, Better Auth, Stripe, and Google OAuth. The platform uses MongoDB atomic operations for real-time seat locking and automatic expiration, while flexible aggregation pipelines unify booking records across guest and authenticated users. Stripe powers both recurring streaming subscriptions and cinema ticket purchases, with digital QR-coded PDF entry passes generated after successful reservations.",
+  "tech": [
+    "Next.js",
+    "React",
+    "Tailwind CSS",
+    "MongoDB",
+    "Express.js",
+    "Better Auth",
+    "Stripe",
+    "Google OAuth",
+    "Vercel",
+    "Zod"
+  ],
+  "tags": [
+    "Next.js",
+    "React",
+    "Tailwind CSS",
+    "MongoDB",
+    "Express.js",
+    "Better Auth",
+    "Stripe",
+    "Google OAuth",
+    "Vercel",
+    "Zod"
+  ],
+  "github": "https://github.com/Zabedfolio/Flixora-Client",
+  "githubUrl": "https://github.com/Zabedfolio/Flixora-Client",
+  "live": "https://flixora-client.vercel.app/",
+  "liveUrl": "https://flixora-client.vercel.app/",
+  "image": "https://i.ibb.co.com/Ndjcw3yM/Screenshot-2026-09-19-150750.png",
+  "features": [
+    "Hybrid SVOD streaming and physical cinema ticket reservation system",
+    "10-minute atomic MongoDB seat-locking mechanism to prevent double-booking",
+    "Automatic seat-lock expiration and reservation lifecycle management",
+    "Unified ticket resolution across guest checkout and authenticated user collections",
+    "User ID and email-based booking aggregation with duplicate prevention",
+    "Stripe Checkout integration for streaming subscriptions and cinema ticket purchases",
+    "Digital QR-coded PDF cinema entry pass generation",
+    "Google OAuth authentication with Better Auth",
+    "Movie discovery, filtering, watch history, and personalized recommendations",
+    "Subscription-based streaming access with multiple membership plans"
+  ],
+  "challenges": [
+    {
+      "title": "Real-Time Seat Reservation & Race Conditions",
+      "challenge": "Preventing double-booking when multiple users select the same cinema seat simultaneously.",
+      "solution": "Implemented a 10-minute atomic seat-locking mechanism in MongoDB with automatic expiration timers to temporarily reserve seats and prevent concurrent bookings."
+    },
+    {
+      "title": "Unified Ticket Resolution Across Collections",
+      "challenge": "User booking data was fragmented across guest checkouts and separate database collections.",
+      "solution": "Engineered a flexible API aggregation pipeline that matches records using userId and userEmail, deduplicates booking data, and serves unified digital ticket passes."
+    },
+    {
+      "title": "Hybrid Architecture: SVOD + Cinema Booking",
+      "challenge": "Combining recurring video subscriptions with one-time physical cinema ticket purchases within a single platform.",
+      "solution": "Built a dual Stripe checkout architecture that handles streaming subscriptions and cinema ticket payments while generating digital QR-coded PDF entry passes."
+    }
+  ],
+  "futureEnhancements": [
+    {
+      "title": "Real-Time WebSocket Seat Syncing",
+      "description": "Upgrade seat availability synchronization from HTTP polling to WebSockets using Socket.IO for instant, sub-second seat updates across all connected users."
+    },
+    {
+      "title": "Mobile App & Offline Downloads",
+      "description": "Build a Progressive Web App (PWA) or React Native application supporting offline video downloads for on-the-go streaming."
+    },
+    {
+      "title": "Local Payment Gateway Integrations",
+      "description": "Expand payment options beyond Stripe by integrating popular local payment gateways such as bKash, Nagad, and SSLCommerz alongside Apple Pay and Google Pay."
+    }
+  ]
+},
+  {
+    "id": 2,
     "title": "RecipeHub - Recipe Sharing Platform",
     "description": "A production-grade full-stack recipe sharing platform where users can discover, create, like, and manage recipes, while administrators monitor content, user permissions, and platform analytics through a secure dashboard.",
     "architecture": "Designed with Next.js App Router and React Server Components for optimal LCP performance. The backend utilizes Express.js microservices with MongoDB schema indexing for fast aggregation pipelines. Authentication is secured via JWT and Firebase Auth, while Stripe handles premium subscription webhooks.",
@@ -43,7 +121,7 @@
     ]
   },
   {
-    "id": 2,
+    "id": 3,
     "title": "Job Portal Web Engine",
     "description": "A high-concurrency full-stack job portal platform connecting job seekers with recruiters, featuring real-time application tracking, automated job filtering, and recruiter dashboards.",
     "architecture": "Built with modular MERN stack architecture. Express.js REST APIs process job postings and application submissions, while MongoDB indexes ensure sub-50ms search query responses. Styled with high-contrast obsidian Tailwind glassmorphism.",
@@ -80,7 +158,7 @@
     ]
   },
   {
-    "id": 3,
+    "id": 4,
     "title": "Programming Courses Platform",
     "description": "A modern, responsive e-learning platform providing structured programming courses, interactive code snippets, module tracking, and seamless course exploration.",
     "architecture": "Engineered for maximum frontend responsiveness using Next.js, React, and Tailwind CSS. Employs lightweight client component state trees and pre-rendered SSG layouts for immediate page transitions.",
@@ -109,7 +187,7 @@
     ]
   },
   {
-    "id": 4,
+    "id": 5,
     "title": "Doctor Appointment Manager",
     "description": "A medical scheduling system enabling patients to find specialist doctors, select available time slots, book online consultations, and manage digital medical appointments.",
     "architecture": "Constructed with Node.js and Express REST services interfacing with MongoDB Atlas database collections. Features custom date-time availability collision detection algorithm to prevent double-booking.",
