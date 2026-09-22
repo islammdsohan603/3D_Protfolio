@@ -84,6 +84,15 @@ export default function FrontierRadarPod() {
 
         {/* Right Column: High Priority Radar Learning Tooling Cards */}
         <div className="lg:col-span-8 space-y-4">
+          {/* Actively Learning Label */}
+          <div className="flex items-center gap-2 mb-1">
+            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-600 dark:text-amber-400 text-[11px] font-mono font-bold tracking-wider uppercase">
+              <span className="w-1.5 h-1.5 rounded-full bg-amber-500 animate-pulse inline-block" />
+              Actively Learning
+            </span>
+            <div className="flex-1 h-px bg-amber-500/20" />
+          </div>
+
           {/* Card 1: Docker Containerization */}
           <div className="p-4 rounded-2xl bg-white dark:bg-slate-900/80 border border-slate-200 dark:border-white/10 hover:border-cyan-400/50 transition-all flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 group shadow-xs dark:shadow-none">
             <div className="flex items-center gap-3">

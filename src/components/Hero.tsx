@@ -6,6 +6,7 @@ import confetti from "canvas-confetti";
 import AntigravityCanvasWrapper from "./canvas/AntigravityCanvasWrapper";
 import Image from "next/image";
 import { ScrollReveal, ScrollRevealStagger, ScrollRevealItem } from "./ui/ScrollReveal";
+import { useLenis } from "lenis/react";
 
 const RESUME_DOWNLOAD_URL = "https://drive.google.com/uc?export=download&id=1gg2hVewdNubgbXD7JEXdMLieLW3hXG0s";
 
@@ -21,9 +22,23 @@ export default function Hero() {
   const [currentRoleIndex, setCurrentRoleIndex] = useState(0);
   const [displayText, setDisplayText] = useState("");
   const [isDeleting, setIsDeleting] = useState(false);
+  const lenis = useLenis();
 
   const [cardRotateX, setCardRotateX] = useState(0);
   const [cardRotateY, setCardRotateY] = useState(0);
+
+  const handleContactClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    const contactElem = document.getElementById("contact");
+    if (contactElem) {
+      e.preventDefault();
+      if (lenis) {
+        lenis.scrollTo(contactElem, { offset: -85, duration: 1.2 });
+      } else {
+        contactElem.scrollIntoView({ behavior: "smooth" });
+      }
+      window.history.pushState({}, "", "#contact");
+    }
+  };
 
   useEffect(() => {
     const targetRole = ROLES[currentRoleIndex];
@@ -146,6 +161,7 @@ export default function Hero() {
               {/* Contact Me — Primary CTA */}
               <a
                 href="#contact"
+                onClick={handleContactClick}
                 className="border border-slate-300 dark:border-zinc-700 bg-white dark:bg-zinc-900 hover:bg-slate-50 dark:hover:bg-zinc-800 text-slate-800 dark:text-zinc-100 text-xs sm:text-sm font-medium px-6 sm:px-7 py-3 rounded-xl shadow-xs dark:shadow-sm transition-all duration-300 flex items-center gap-2 group min-h-[44px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500"
               >
                 <Mail className="w-4 h-4 sm:w-5 sm:h-5 text-slate-500 dark:text-zinc-400 group-hover:text-slate-800 dark:group-hover:text-zinc-200 transition-colors" />

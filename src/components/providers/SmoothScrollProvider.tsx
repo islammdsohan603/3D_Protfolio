@@ -23,7 +23,8 @@ export default function SmoothScrollProvider({ children }: SmoothScrollProviderP
         gestureOrientation: "vertical",
         smoothWheel: true,
         wheelMultiplier: 1.0,
-        touchMultiplier: 1.5,
+        touchMultiplier: 1.0,
+        syncTouch: false,
         infinite: false,
       }}
     >

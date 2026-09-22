@@ -7,6 +7,7 @@ import confetti from "canvas-confetti";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useTheme } from "next-themes";
+import { useLenis } from "lenis/react";
 
 const RESUME_DOWNLOAD_URL = "https://drive.google.com/uc?export=download&id=1gg2hVewdNubgbXD7JEXdMLieLW3hXG0s";
 
@@ -29,6 +30,7 @@ const emptySubscribe = () => () => {};
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const lenis = useLenis();
   const mounted = React.useSyncExternalStore(
     emptySubscribe,
     () => true,
@@ -36,6 +38,23 @@ export default function Navbar() {
   );
   const pathname = usePathname();
   const { theme, setTheme } = useTheme();
+
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    setMobileMenuOpen(false);
+    if (href.startsWith("/#") && (pathname === "/" || pathname === "")) {
+      const targetId = href.replace("/#", "");
+      const targetElement = document.getElementById(targetId);
+      if (targetElement) {
+        e.preventDefault();
+        if (lenis) {
+          lenis.scrollTo(targetElement, { offset: -85, duration: 1.2 });
+        } else {
+          targetElement.scrollIntoView({ behavior: "smooth" });
+        }
+        window.history.pushState({}, "", href);
+      }
+    }
+  };
 
   // Handle scroll detection for background blur intensification
   useEffect(() => {
@@ -135,6 +154,7 @@ export default function Navbar() {
             <Link
               key={link.name}
               href={link.href}
+              onClick={(e) => handleNavClick(e, link.href)}
               className="px-3.5 py-1.5 text-xs font-medium text-slate-600 dark:text-zinc-400 hover:text-slate-900 dark:hover:text-zinc-100 rounded-full hover:bg-slate-100/90 dark:hover:bg-zinc-800/60 transition-all duration-200 tracking-tight min-h-[36px] flex items-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500"
             >
               {link.name}
@@ -305,7 +325,7 @@ export default function Navbar() {
                   >
                     <Link
                       href={link.href}
-                      onClick={handleLinkClick}
+                      onClick={(e) => handleNavClick(e, link.href)}
                       className="text-sm sm:text-base font-medium text-slate-700 dark:text-zinc-300 hover:text-slate-900 dark:hover:text-white py-3 px-3 rounded-lg hover:bg-slate-100 dark:hover:bg-zinc-900/60 transition-colors flex items-center justify-between min-h-[44px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500"
                     >
                       <span>{link.name}</span>

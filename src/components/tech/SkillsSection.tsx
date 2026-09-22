@@ -219,9 +219,26 @@ export default function SkillsSection() {
             transition={{ duration: 0.4 }}
             className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8 sm:mb-10"
           >
-            {filteredItems.map((item, idx) => (
-              <TechBentoCard key={item.id} item={item} index={idx} />
-            ))}
+            {filteredItems.map((item, idx) => {
+              const isFirstActiveRadar =
+                item.proficiencyTier === "Active Radar / Lab" &&
+                (idx === 0 || filteredItems[idx - 1].proficiencyTier !== "Active Radar / Lab");
+              return (
+                <React.Fragment key={item.id}>
+                  {/* Actively Learning label — spans full grid width before Docker/Socket.io */}
+                  {isFirstActiveRadar && (
+                    <div className="col-span-1 sm:col-span-2 lg:col-span-4 flex items-center gap-3 pt-2">
+                      <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-600 dark:text-amber-400 text-[11px] font-mono font-bold tracking-wider uppercase">
+                        <span className="w-1.5 h-1.5 rounded-full bg-amber-500 animate-pulse inline-block" />
+                        Actively Learning
+                      </span>
+                      <div className="flex-1 h-px bg-amber-500/20" />
+                    </div>
+                  )}
+                  <TechBentoCard item={item} index={idx} />
+                </React.Fragment>
+              );
+            })}
           </motion.div>
         </AnimatePresence>
 

@@ -20,6 +20,18 @@ export default function ScrollIndicator() {
   const [isAtBottom, setIsAtBottom] = useState(false);
   const lenis = useLenis();
 
+  // 60-120fps direct synchronization with Lenis scroll engine
+  useLenis(({ scroll, progress: lenisProgress, limit }) => {
+    if (limit <= 0) {
+      setProgress(1);
+      setIsAtBottom(true);
+      return;
+    }
+    const clampedProgress = Math.min(1, Math.max(0, lenisProgress));
+    setProgress(clampedProgress);
+    setIsAtBottom(scroll >= limit - 70 || clampedProgress >= 0.985);
+  });
+
   useEffect(() => {
     const handleScroll = () => {
       const scrollY = window.scrollY;
